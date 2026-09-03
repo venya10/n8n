@@ -1,0 +1,65 @@
+{
+  "n8n-nodes-base.manualTrigger": [
+    {"to": "n8n-nodes-base.httpRequest", "count": 40},
+    {"to": "n8n-nodes-base.set", "count": 25},
+    {"to": "n8n-nodes-base.code", "count": 15}
+  ],
+  "n8n-nodes-base.scheduleTrigger": [
+    {"to": "n8n-nodes-base.httpRequest", "count": 60},
+    {"to": "n8n-nodes-base.googleSheets", "count": 30},
+    {"to": "n8n-nodes-base.gmail", "count": 20},
+    {"to": "n8n-nodes-base.postgres", "count": 18}
+  ],
+  "n8n-nodes-base.webhook": [
+    {"to": "n8n-nodes-base.if", "count": 50},
+    {"to": "n8n-nodes-base.set", "count": 45},
+    {"to": "n8n-nodes-base.respondToWebhook", "count": 30},
+    {"to": "n8n-nodes-base.switch", "count": 20}
+  ],
+  "n8n-nodes-base.httpRequest": [
+    {"to": "n8n-nodes-base.set", "count": 55},
+    {"to": "n8n-nodes-base.if", "count": 40},
+    {"to": "n8n-nodes-base.code", "count": 25},
+    {"to": "n8n-nodes-base.splitInBatches", "count": 15}
+  ],
+  "n8n-nodes-base.set": [
+    {"to": "n8n-nodes-base.if", "count": 45},
+    {"to": "n8n-nodes-base.httpRequest", "count": 30},
+    {"to": "n8n-nodes-base.googleSheets", "count": 25},
+    {"to": "n8n-nodes-base.slack", "count": 20}
+  ],
+  "n8n-nodes-base.if": [
+    {"to": "n8n-nodes-base.slack", "count": 35},
+    {"to": "n8n-nodes-base.set", "count": 30},
+    {"to": "n8n-nodes-base.noOp", "count": 25},
+    {"to": "n8n-nodes-base.gmail", "count": 20}
+  ],
+  "n8n-nodes-base.switch": [
+    {"to": "n8n-nodes-base.slack", "count": 25},
+    {"to": "n8n-nodes-base.set", "count": 20},
+    {"to": "n8n-nodes-base.merge", "count": 18}
+  ],
+  "n8n-nodes-base.code": [
+    {"to": "n8n-nodes-base.if", "count": 30},
+    {"to": "n8n-nodes-base.set", "count": 25},
+    {"to": "n8n-nodes-base.merge", "count": 15}
+  ],
+  "n8n-nodes-base.splitInBatches": [
+    {"to": "n8n-nodes-base.httpRequest", "count": 35},
+    {"to": "n8n-nodes-base.wait", "count": 15}
+  ],
+  "n8n-nodes-base.merge": [
+    {"to": "n8n-nodes-base.set", "count": 30},
+    {"to": "n8n-nodes-base.googleSheets", "count": 20},
+    {"to": "n8n-nodes-base.aggregate", "count": 15}
+  ],
+  "n8n-nodes-base.openAi": [
+    {"to": "n8n-nodes-base.set", "count": 30},
+    {"to": "n8n-nodes-base.if", "count": 20},
+    {"to": "n8n-nodes-base.notion", "count": 15}
+  ],
+  "n8n-nodes-base.errorTrigger": [
+    {"to": "n8n-nodes-base.slack", "count": 40},
+    {"to": "n8n-nodes-base.gmail", "count": 20}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "n8n Copilot",
+  "version": "0.1.0",
+  "description": "Suggests the next node while you build n8n workflows.",
+  "permissions": ["storage"],
+  "host_permissions": ["http://localhost:8000/*", "https://*.n8n.cloud/*", "http://localhost:5678/*"],
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.n8n.cloud/*", "http://localhost:5678/*", "https://*.app.n8n.cloud/*"],
+      "js": ["src/content/reader.js", "src/ui/overlay.js", "src/content/content.js"],
+      "css": ["src/ui/overlay.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "n8n Copilot"
+  }
+}
