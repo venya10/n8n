@@ -35,7 +35,8 @@ def _build_prompt(last_node_name: str, workflow_name: str | None, common_next: l
 
 def _fallback_spec(last_node_name: str, common_next: list[str]) -> str:
     if common_next:
-        return f"A node that follows '{last_node_name}', similar in purpose to: {', '.join(common_next)}."
+        similar_to = ", ".join(common_next)
+        return f"A node that follows '{last_node_name}', similar in purpose to: {similar_to}."
     return f"A node that naturally continues the workflow after '{last_node_name}'."
 
 
