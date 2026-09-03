@@ -55,9 +55,16 @@ const N8nCopilotOverlay = (() => {
     panel.hidden = false;
   }
 
+  function renderError(message) {
+    const panel = ensurePanel();
+    const body = panel.querySelector(".n8nc-body");
+    body.innerHTML = `<div class="n8nc-error">${message}</div>`;
+    panel.hidden = false;
+  }
+
   function hide() {
     if (panelEl) panelEl.hidden = true;
   }
 
-  return { render, hide };
+  return { render, renderError, hide };
 })();

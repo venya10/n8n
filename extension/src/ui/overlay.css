@@ -73,3 +73,9 @@
   opacity: 0.6;
   padding: 8px 0;
 }
+
+#n8n-copilot-panel .n8nc-error {
+  color: #ff8a8a;
+  padding: 8px 0;
+  line-height: 1.4;
+}

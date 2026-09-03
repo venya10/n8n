@@ -4,8 +4,10 @@
  */
 (() => {
   const POLL_INTERVAL_MS = 4000;
+  const FAILURE_THRESHOLD = 3;
   let lastNodeSignature = null;
   let lastSuggestedForNodeId = null;
+  let consecutiveFailures = 0;
 
   function nodeSignature(context) {
     return context.nodes.map((n) => n.id).join(",") + "|" + context.last_node_id;
@@ -15,7 +17,7 @@
     let context;
     try {
       context = await N8nCopilotReader.getCurrentWorkflowContext();
-    } catch (err) {
+    } catch {
       // Likely not on a workflow page, or the REST path differs for this
       // n8n version/instance — fail quiet rather than spamming the console.
       return;
@@ -27,8 +29,11 @@
     }
 
     const signature = nodeSignature(context);
+    // Only treat a signature as "handled" once we know the call succeeded —
+    // otherwise a dead backend would mean this poll only retries when the
+    // workflow itself changes again, and the failure count below would
+    // never reach the threshold.
     if (signature === lastNodeSignature) return; // nothing changed
-    lastNodeSignature = signature;
 
     if (context.last_node_id === lastSuggestedForNodeId) return;
 
@@ -36,8 +41,16 @@
       { type: "SUGGEST", context },
       (response) => {
         if (chrome.runtime.lastError || !response || response.error) {
+          consecutiveFailures += 1;
+          if (consecutiveFailures >= FAILURE_THRESHOLD) {
+            N8nCopilotOverlay.renderError(
+              "Can't reach the n8n Copilot backend. Check the backend URL in the extension popup."
+            );
+          }
           return;
         }
+        consecutiveFailures = 0;
+        lastNodeSignature = signature;
         lastSuggestedForNodeId = context.last_node_id;
         N8nCopilotOverlay.render(response.suggestions, (suggestion) => {
           navigator.clipboard?.writeText(suggestion.display_name).catch(() => {});

@@ -9,6 +9,9 @@
     input { width: 100%; box-sizing: border-box; padding: 6px; margin-bottom: 10px; }
     button { width: 100%; padding: 6px; cursor: pointer; }
     #status { margin-top: 8px; opacity: 0.7; }
+    #connection { margin-top: 6px; font-weight: 600; }
+    #connection.ok { color: #1a7f37; }
+    #connection.error { color: #cf222e; }
   </style>
 </head>
 <body>
@@ -16,6 +19,7 @@
   <input id="apiBase" type="text" placeholder="http://localhost:8000" />
   <button id="save">Save</button>
   <div id="status"></div>
+  <div id="connection"></div>
   <script src="popup.js"></script>
 </body>
 </html>
