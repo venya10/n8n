@@ -10,3 +10,6 @@ testpaths = ["tests"]
 # So `app` (backend/app) is importable regardless of how pytest is invoked,
 # without needing a `pip install -e .` step or PYTHONPATH set by hand.
 pythonpath = ["."]
+# test_llm.py's tests are plain `async def` (no @pytest.mark.asyncio needed).
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

@@ -57,7 +57,7 @@ Try it:
 curl -X POST http://localhost:8000/suggest -H "Content-Type: application/json" -d "{\"context\": {\"nodes\": [{\"id\": \"1\", \"type\": \"n8n-nodes-base.webhook\"}], \"last_node_id\": \"1\"}}"
 ```
 
-Optional: copy `backend/.env.example` to `backend/.env` and set `ANTHROPIC_API_KEY` (or `OLLAMA_URL` + `OLLAMA_MODEL`) to enable the HyDE step, then pass `"use_llm": true` in the request. Without either configured, a deterministic template fallback is used so the pipeline still runs end-to-end.
+Optional: copy `backend/.env.example` to `backend/.env` and set `ANTHROPIC_API_KEY`, `GEMINI_API_KEY` (free tier, no local install — get one at [aistudio.google.com/apikey](https://aistudio.google.com/apikey)), or `OLLAMA_URL` + `OLLAMA_MODEL` (fully local) to enable the HyDE step, then pass `"use_llm": true` in the request. Without any of them configured, a deterministic template fallback is used so the pipeline still runs end-to-end.
 
 ## Running the tests
 

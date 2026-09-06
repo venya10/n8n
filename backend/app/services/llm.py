@@ -5,7 +5,7 @@ nodes, ask a small LLM to describe what the ideal next node should do. That
 description is embedded and used as the semantic search query, rather than
 embedding the raw workflow graph directly (which embeds poorly).
 
-If no LLM provider is configured (no ANTHROPIC_API_KEY / OPENAI_API_KEY /
+If no LLM provider is configured (no ANTHROPIC_API_KEY / GEMINI_API_KEY /
 local Ollama endpoint), falls back to a deterministic template so the rest of
 the pipeline is still testable end-to-end without any external dependency.
 """
@@ -18,6 +18,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 OLLAMA_URL = os.getenv("OLLAMA_URL")  # e.g. http://localhost:11434
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2")
 
@@ -49,6 +51,8 @@ async def generate_next_node_spec(
 
     if ANTHROPIC_API_KEY:
         return await _call_anthropic(prompt)
+    if GEMINI_API_KEY:
+        return await _call_gemini(prompt)
     if OLLAMA_URL:
         return await _call_ollama(prompt)
 
@@ -73,6 +77,18 @@ async def _call_anthropic(prompt: str) -> str:
         resp.raise_for_status()
         data = resp.json()
         return data["content"][0]["text"].strip()
+
+
+async def _call_gemini(prompt: str) -> str:
+    async with httpx.AsyncClient(timeout=15) as client:
+        resp = await client.post(
+            f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent",
+            params={"key": GEMINI_API_KEY},
+            json={"contents": [{"parts": [{"text": prompt}]}]},
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        return data["candidates"][0]["content"]["parts"][0]["text"].strip()
 
 
 async def _call_ollama(prompt: str) -> str:
