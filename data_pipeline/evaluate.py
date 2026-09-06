@@ -24,14 +24,21 @@ Metrics (standard for ranked recommendation, not invented for this):
   the right answer 1st over merely including it somewhere in the top 10.
 
 Usage:
-    python evaluate.py                  # sweep semantic_weight 0.0 -> 1.0
-    python evaluate.py --weight 0.4      # evaluate one specific split
+    python evaluate.py                     # sweep semantic_weight 0.0 -> 1.0
+    python evaluate.py --weight 0.4         # evaluate one specific split
+    python evaluate.py --use-llm            # does the HyDE query beat the plain
+                                             # template query, on a small sample?
+    python evaluate.py --use-llm --sample 200
 """
 
 import argparse
+import asyncio
 import random
 import sys
+import time
 from pathlib import Path
+
+import httpx
 
 from build_transitions import extract_edges, load_workflow, mine_transitions
 
@@ -39,11 +46,14 @@ RAW_DIR = Path(__file__).resolve().parent / "data" / "raw_templates"
 TEST_FRACTION = 0.2
 SEED = 0
 RANK_CUTOFF = 20  # how deep to look for the real answer before scoring it a miss
+DEFAULT_LLM_SAMPLE_SIZE = 60
+LLM_HINT_TOP_K = 5  # matches suggest.py's req.top_k default for the common_next hint
+LLM_CALL_DELAY_SECONDS = 4.5  # observed free-tier limit is much stricter than 1/sec
 
 # Import the backend's actual ranking code rather than reimplementing it —
 # an eval that tests a reimplementation proves nothing about the real app.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
-from app.services import retrieval, rerank  # noqa: E402
+from app.services import llm, retrieval, rerank  # noqa: E402
 
 
 def split_templates(template_files: list[Path]) -> tuple[list[Path], list[Path]]:
@@ -89,6 +99,60 @@ def candidates_by_from_type(test_edges: list[tuple[str, str]], train_transitions
     return cache
 
 
+async def _generate_spec_with_retry(from_name: str, common_next_names: list[str]) -> str | None:
+    """Retries on 429 with backoff — free-tier rate limits are much
+    stricter than a flat per-call delay can reliably stay under, and giving
+    up on the first 429 (the original behavior here) wasted most of a
+    sample to a transient, retryable error rather than a real failure.
+    Returns None (caller skips this from_type) if it still fails after
+    retrying — a real error, not just rate limiting, should still surface.
+    """
+    delays = [LLM_CALL_DELAY_SECONDS, 15, 30]
+    for attempt, delay in enumerate(delays):
+        try:
+            return await llm.generate_next_node_spec(from_name, None, common_next_names)
+        except httpx.HTTPStatusError as exc:
+            if exc.response.status_code != 429 or attempt == len(delays) - 1:
+                print(f"  (LLM call failed for {from_name!r}: {exc} - skipping)")
+                return None
+            time.sleep(delay)
+    return None
+
+
+async def candidates_by_from_type_llm(distinct_from_types: list[str], train_transitions: dict) -> dict:
+    """Same idea as candidates_by_from_type, but the semantic query comes
+    from llm.generate_next_node_spec (the HyDE step) instead of the plain
+    "a node that follows X" template — mirrors exactly what suggest.py does
+    when use_llm=True, including capping the common_next hint at
+    LLM_HINT_TOP_K (suggest.py's req.top_k default), not RANK_CUTOFF.
+    """
+    cache = {}
+    for from_type in distinct_from_types:
+        stats_candidates = sorted(
+            train_transitions.get(from_type, []), key=lambda e: e["count"], reverse=True
+        )[:RANK_CUTOFF]
+        meta = retrieval.NODE_BY_TYPE.get(from_type)
+        from_name = meta["display_name"] if meta else from_type
+
+        hint_candidates = stats_candidates[:LLM_HINT_TOP_K]
+        common_next_names = [
+            retrieval.NODE_BY_TYPE[c["to"]]["display_name"]
+            for c in hint_candidates
+            if c["to"] in retrieval.NODE_BY_TYPE
+        ]
+
+        query = await _generate_spec_with_retry(from_name, common_next_names)
+        time.sleep(LLM_CALL_DELAY_SECONDS)
+        if query is None:
+            continue
+
+        semantic_candidates = retrieval.semantic_search(
+            query, top_k=RANK_CUTOFF, exclude={from_type}
+        )
+        cache[from_type] = (stats_candidates, semantic_candidates)
+    return cache
+
+
 def evaluate(
     test_edges: list[tuple[str, str]], candidate_cache: dict, semantic_weight: float
 ) -> dict:
@@ -101,6 +165,10 @@ def evaluate(
         # heard of (no metadata entry) — same "silently dropped" behavior
         # the real API has via rerank's NODE_BY_TYPE lookup.
         if true_to_type not in retrieval.NODE_BY_TYPE:
+            continue
+        # Not in the cache means either it's outside this run's sample, or
+        # (llm mode only) the LLM call for it failed and was skipped.
+        if from_type not in candidate_cache:
             continue
         evaluable += 1
 
@@ -133,6 +201,97 @@ def evaluate(
     }
 
 
+def _print_table(rows: list[tuple[str, dict]]) -> None:
+    header = f"{'':>18} | {'evaluable':>9} | {'MRR':>6} | " + " | ".join(
+        f"R@{k}" for k in (1, 3, 5, 10)
+    )
+    print(header)
+    print("-" * len(header))
+    for label, result in rows:
+        if result["evaluable"] == 0:
+            print(f"{label:>18} | no evaluable edges")
+            continue
+        print(
+            f"{label:>18} | {result['evaluable']:>9} | {result['mrr']:>6.3f} | "
+            + " | ".join(f"{result[f'recall@{k}']:.3f}" for k in (1, 3, 5, 10))
+        )
+
+
+async def run_llm_comparison(
+    test_edges: list[tuple[str, str]], train_transitions: dict, sample_size: int
+) -> None:
+    """Does the LLM/HyDE query beat the plain template query? Compares both
+    on the *same* sampled subset — sampled by distinct from_type (not by
+    edge) so the number of real LLM calls is bounded and predictable.
+
+    Reports two things:
+    - semantic_weight=1.0 (pure semantic, stats zeroed out): isolates
+      whether the LLM query makes semantic search itself better, since the
+      full-sweep result already showed stats dominates and can mask this.
+    - semantic_weight=0.1 (the shipped default): the actual real-world
+      impact on /suggest's output, stats included.
+    """
+    distinct_from_types = list({from_type for from_type, _ in test_edges})
+    random.Random(SEED).shuffle(distinct_from_types)
+    sampled_types = set(distinct_from_types[:sample_size])
+    sampled_edges = [(f, t) for f, t in test_edges if f in sampled_types]
+    print(
+        f"Sampling {len(sampled_types)} distinct from_types "
+        f"({len(sampled_edges)} edges) - bounds real LLM calls to {len(sampled_types)}.\n"
+    )
+
+    print("Building plain-template candidates (baseline)...")
+    plain_cache = candidates_by_from_type(sampled_edges, train_transitions)
+
+    delay_estimate = len(sampled_types) * LLM_CALL_DELAY_SECONDS
+    print(
+        f"Building LLM/HyDE candidates ({len(sampled_types)} real API calls, "
+        f"~{delay_estimate:.0f}s minimum, more on rate-limit retries)..."
+    )
+    llm_cache = await candidates_by_from_type_llm(list(sampled_types), train_transitions)
+    print(f"  {len(llm_cache)}/{len(sampled_types)} LLM calls succeeded\n")
+
+    # Fairness matters here: only compare on edges whose from_type actually
+    # got a real LLM-generated query. Evaluating "plain" on every sampled
+    # edge while "LLM" only covers whichever from_types happened to succeed
+    # would silently compare two different, non-random subsets — not the
+    # same experiment.
+    succeeded_types = set(llm_cache.keys())
+    paired_edges = [(f, t) for f, t in sampled_edges if f in succeeded_types]
+    if len(succeeded_types) < len(sampled_types):
+        print(
+            f"Restricting comparison to the {len(succeeded_types)} from_types with a successful "
+            f"LLM call ({len(paired_edges)} edges) so both sides are evaluated on the same data.\n"
+        )
+
+    for weight, weight_label in [(1.0, "pure semantic"), (0.1, "shipped default (0.9/0.1)")]:
+        print(f"=== semantic_weight={weight} ({weight_label}) ===")
+        _print_table(
+            [
+                ("plain template", evaluate(paired_edges, plain_cache, weight)),
+                ("LLM/HyDE query", evaluate(paired_edges, llm_cache, weight)),
+            ]
+        )
+        print()
+
+    # If the LLM query is meaningfully better in isolation (weight=1.0 above)
+    # but that improvement barely moved the shipped-default blend, the most
+    # likely explanation is that 0.9/0.1 was tuned for the plain template
+    # query and is no longer the right split once semantic search actually
+    # has real signal to contribute. Sweeping here costs nothing extra —
+    # it's the same cached candidates, just re-run through merge_and_rank
+    # at different weights, no further API calls.
+    print("=== Full weight sweep on this sample, using the LLM/HyDE query ===")
+    _print_table(
+        [(f"{w / 10:.1f}", evaluate(paired_edges, llm_cache, w / 10)) for w in range(11)]
+    )
+    print()
+    print("=== Same sweep, plain template query (for comparison) ===")
+    _print_table(
+        [(f"{w / 10:.1f}", evaluate(paired_edges, plain_cache, w / 10)) for w in range(11)]
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -140,6 +299,17 @@ def main() -> None:
         type=float,
         default=None,
         help="Evaluate one specific semantic_weight (0.0-1.0) instead of sweeping.",
+    )
+    parser.add_argument(
+        "--use-llm",
+        action="store_true",
+        help="Compare the LLM/HyDE query against the plain template query, on a sample.",
+    )
+    parser.add_argument(
+        "--sample",
+        type=int,
+        default=DEFAULT_LLM_SAMPLE_SIZE,
+        help=f"Distinct from_types to sample for --use-llm (default {DEFAULT_LLM_SAMPLE_SIZE}).",
     )
     args = parser.parse_args()
 
@@ -157,25 +327,17 @@ def main() -> None:
     if not retrieval.load_model():
         raise SystemExit("Semantic search model failed to load — can't evaluate.")
 
+    if args.use_llm:
+        asyncio.run(run_llm_comparison(test_edges, train_transitions, args.sample))
+        return
+
     print("Embedding candidates once per distinct from_type (reused across the weight sweep)...")
     candidate_cache = candidates_by_from_type(test_edges, train_transitions)
 
     weights = [args.weight] if args.weight is not None else [i / 10 for i in range(11)]
-
-    header = f"{'semantic_weight':>15} | {'evaluable':>9} | {'MRR':>6} | " + " | ".join(
-        f"R@{k}" for k in (1, 3, 5, 10)
+    _print_table(
+        [(f"{w:.1f}", evaluate(test_edges, candidate_cache, w)) for w in weights]
     )
-    print(header)
-    print("-" * len(header))
-    for w in weights:
-        result = evaluate(test_edges, candidate_cache, w)
-        if result["evaluable"] == 0:
-            print(f"{w:>15.1f} | no evaluable edges")
-            continue
-        print(
-            f"{w:>15.1f} | {result['evaluable']:>9} | {result['mrr']:>6.3f} | "
-            + " | ".join(f"{result[f'recall@{k}']:.3f}" for k in (1, 3, 5, 10))
-        )
 
 
 if __name__ == "__main__":
