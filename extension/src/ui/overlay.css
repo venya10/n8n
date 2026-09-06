@@ -58,9 +58,18 @@
   justify-content: space-between;
 }
 
-#n8n-copilot-panel .n8nc-score {
-  opacity: 0.6;
-  font-weight: 400;
+#n8n-copilot-panel .n8nc-meter {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+#n8n-copilot-panel .n8nc-meter-fill {
+  height: 100%;
+  background: #6e6ef5;
+  border-radius: 2px;
 }
 
 #n8n-copilot-panel .n8nc-card-desc {

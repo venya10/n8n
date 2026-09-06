@@ -40,10 +40,18 @@ const N8nCopilotOverlay = (() => {
       for (const s of suggestions) {
         const card = document.createElement("div");
         card.className = "n8nc-card";
+        // `score` is a blended heuristic (0.6 * normalized transition
+        // frequency + 0.4 * cosine similarity), not a calibrated
+        // probability — rendering it as "73%" would invite reading it as
+        // "73% likely correct". A relative-length bar shows ranking without
+        // implying a confidence level the number doesn't actually carry.
+        const meterWidth = Math.max(0, Math.min(100, Math.round(s.score * 100)));
         card.innerHTML = `
           <div class="n8nc-card-title">
             <span>${s.display_name}</span>
-            <span class="n8nc-score">${Math.round(s.score * 100)}%</span>
+          </div>
+          <div class="n8nc-meter" title="Relative match strength">
+            <div class="n8nc-meter-fill" style="width: ${meterWidth}%"></div>
           </div>
           <div class="n8nc-card-desc">${s.description}</div>
         `;
