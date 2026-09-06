@@ -107,9 +107,24 @@ python fill_top_descriptions.py   # real descriptions for the ~40 highest-usage 
 
 Restart the backend afterward — it re-embeds `node_metadata.json` into an in-memory matrix on startup (brute-force cosine similarity; fine up to a few thousand node types).
 
+## Evaluating suggestion quality
+
+`data_pipeline/evaluate.py` answers "is this actually working?" against real data, not vibes: it splits the 494 scraped templates 80/20 (by template, not by edge, so nothing in the test set leaks into training), mines `transitions.json` from the train split only, and for every real `from_type -> to_type` edge in the test split, asks the backend's actual ranking code to predict `to_type` and checks where it landed. Standard recommender metrics — Recall@K (did the real answer appear in the top K?) and MRR (how high did it rank, on average, rewarding 1st place over merely "somewhere in the top 10").
+
+```bash
+cd data_pipeline
+pip install -r requirements.txt -r ../backend/requirements.txt  # evaluate.py imports the real backend ranking code
+python evaluate.py                # sweeps semantic_weight from 0.0 to 1.0
+python evaluate.py --weight 0.1   # evaluate one specific split
+```
+
+**What it found**, against 1,547 evaluable held-out edges: pure transition-frequency ranking (`semantic_weight=0.0`) beat every blend on every metric (MRR 0.348, Recall@5 0.547, Recall@10 0.701), and got *worse*, not better, as semantic search's weight increased — cratering badly past 0.6. The `0.6/0.4` split this shipped with originally was never validated against anything; it was a plausible-sounding guess. It's now `0.9/0.1` (see `backend/app/services/rerank.py`) — not literally `1.0/0.0`, because a semantic weight of exactly zero would degenerate the "unknown node type" fallback path (nothing else to rank by) to an arbitrary tie-order instead of a real similarity ranking, and 0.1 scored statistically indistinguishably from 0.0 anyway (the gap is smaller than one standard error at this sample size).
+
+Checked the more charitable hypothesis too — that semantic search would at least win on node types stats has *never seen* (true cold start, where there's no frequency signal to fall back on): stratifying the 30 such edges out separately, semantic search still didn't help there either. The likely reason: 127 of 192 node types still carry a placeholder `"TODO: ..."` description (see below) rather than real prose, which gives semantic search very little to actually discriminate on. This isn't a verdict that semantic search is a bad idea — it's a measurement that it isn't paying off yet at current description coverage. Re-run `evaluate.py` after writing more real descriptions to see if that changes.
+
 ## Known limitations
 
 - **`reader.js`'s REST endpoint is verified against n8n cloud**, reading real workflow state via `fetch('/rest/workflows/:id')` successfully. It's still n8n's internal API, not a stable public contract, and self-hosted n8n hasn't been checked — if you're on self-hosted, verify the response shape against your version's Network tab before relying on it.
-- **~65 of 192 node types have real descriptions** (the 25 originally hand-curated, plus the ~40 highest-usage types from real data); the rest are long-tail community node packages with a placeholder description — see [Rebuilding the dataset](#rebuilding-the-dataset).
+- **~65 of 192 node types have real descriptions** (the 25 originally hand-curated, plus the ~40 highest-usage types from real data); the rest are long-tail community node packages with a placeholder description — see [Rebuilding the dataset](#rebuilding-the-dataset). This is very likely why semantic search underperforms in the evaluation above.
 - **`/feedback` is in-memory only** — it nudges `stats.py`'s transition counts for the life of the process, then resets on restart. A real deployment would persist this to a small database instead.
 - **`use_llm: true` is off by default** in the extension (`background.js` always sends `use_llm: false`) — the HyDE prompt in `backend/app/services/llm.py` works but hasn't been tuned.
