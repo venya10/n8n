@@ -7,3 +7,6 @@ select = ["E", "F", "I"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# So `app` (backend/app) is importable regardless of how pytest is invoked,
+# without needing a `pip install -e .` step or PYTHONPATH set by hand.
+pythonpath = ["."]
