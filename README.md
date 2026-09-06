@@ -27,9 +27,9 @@ extension (Chrome, MV3)          backend (FastAPI)
 └─────────────────────┘         └───────────────────────────┘
 ```
 
-- `backend/` — FastAPI service exposing `POST /suggest` and `POST /feedback`. Ships with hand-curated sample data (`backend/app/data/`) so it runs standalone with zero external services or API keys.
+- `backend/` — FastAPI service exposing `POST /suggest` and `POST /feedback`. Ships with real data (`backend/app/data/`) mined from 494 public n8n.io templates, so it runs standalone with zero external services or API keys.
 - `extension/` — Manifest V3 Chrome extension. Reads the current workflow via n8n's internal REST API, polls for changes, and shows a floating suggestion panel.
-- `data_pipeline/` — Scripts to scrape real n8n templates and regenerate `transitions.json` / `node_metadata.json` at scale, replacing the sample data. Not run at scale yet — see [Known limitations](#known-limitations).
+- `data_pipeline/` — Scripts that scrape n8n.io's public template gallery and regenerate `transitions.json` / `node_metadata.json` from it. Already run once to produce the data the backend ships with — rerun it any time to refresh against more/newer templates.
 
 ## Running the backend
 
@@ -92,21 +92,24 @@ The backend deploys to [Render](https://render.com)'s free tier as a Docker web 
 3. Render builds `backend/Dockerfile` and deploys it; `envVars` in `render.yaml` are left blank on purpose (`sync: false`) — fill in `ANTHROPIC_API_KEY` etc. in the Render dashboard if you want the LLM step, or leave them unset.
 4. Once it's live, `GET https://<service>.onrender.com/health` should return `{"status": "ok", "model_loaded": true}`.
 
-## Rebuilding the real dataset
+## Rebuilding the dataset
 
 ```bash
 cd data_pipeline
 pip install -r requirements.txt
 python scrape_templates.py --limit 500
 python build_transitions.py
-python build_node_embeddings.py   # then hand-fill any "TODO" descriptions it flags
+python build_node_embeddings.py
+python fill_top_descriptions.py   # real descriptions for the ~40 highest-usage node types
 ```
+
+`fill_top_descriptions.py` only covers the highest-usage node types (by mined transition volume) — anything outside that list keeps a `"TODO: write a real description for ..."` placeholder. Semantic search quality for those types is weaker until someone writes a real one; check `backend/app/data/node_metadata.json` for the current TODO count.
 
 Restart the backend afterward — it re-embeds `node_metadata.json` into an in-memory matrix on startup (brute-force cosine similarity; fine up to a few thousand node types).
 
 ## Known limitations
 
-- **`reader.js`'s REST endpoint is unverified against a live n8n instance.** It reads workflow state via `fetch('/rest/workflows/:id')` — n8n's internal API, not a stable public contract. Verify it against your n8n version's Network tab before relying on it, and adjust `extension/src/content/reader.js` if the path/response shape has changed. This gates everything else the extension does.
-- **The sample dataset is 25 hand-curated nodes**, not the output of `data_pipeline/`. Good enough to demo the ranking logic end-to-end, not representative of n8n's full node catalog.
+- **`reader.js`'s REST endpoint is verified against n8n cloud**, reading real workflow state via `fetch('/rest/workflows/:id')` successfully. It's still n8n's internal API, not a stable public contract, and self-hosted n8n hasn't been checked — if you're on self-hosted, verify the response shape against your version's Network tab before relying on it.
+- **~65 of 192 node types have real descriptions** (the 25 originally hand-curated, plus the ~40 highest-usage types from real data); the rest are long-tail community node packages with a placeholder description — see [Rebuilding the dataset](#rebuilding-the-dataset).
 - **`/feedback` is in-memory only** — it nudges `stats.py`'s transition counts for the life of the process, then resets on restart. A real deployment would persist this to a small database instead.
 - **`use_llm: true` is off by default** in the extension (`background.js` always sends `use_llm: false`) — the HyDE prompt in `backend/app/services/llm.py` works but hasn't been tuned.

@@ -1,3 +1,6 @@
+from app.services import stats
+
+
 def _suggest(client, **overrides):
     body = {
         "context": {
@@ -18,8 +21,12 @@ def test_suggest_known_node_returns_ranked_suggestions(client):
 
     suggestions = body["suggestions"]
     assert len(suggestions) > 0
-    # Webhook is commonly followed by an IF node in the sample transition data.
-    assert any(s["node_type"] == "n8n-nodes-base.if" for s in suggestions)
+    # Whatever the mined transition data currently says most often follows a
+    # webhook should show up in the ranked suggestions. Reading it from
+    # stats.py directly (rather than hardcoding a node type) keeps this test
+    # valid across dataset regenerations.
+    top_stats_candidate = stats.get_common_next_nodes("n8n-nodes-base.webhook", limit=1)[0]["to"]
+    assert any(s["node_type"] == top_stats_candidate for s in suggestions)
     # Scores are sorted descending.
     scores = [s["score"] for s in suggestions]
     assert scores == sorted(scores, reverse=True)

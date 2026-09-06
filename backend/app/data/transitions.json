@@ -1,65 +1,5780 @@
 {
-  "n8n-nodes-base.manualTrigger": [
-    {"to": "n8n-nodes-base.httpRequest", "count": 40},
-    {"to": "n8n-nodes-base.set", "count": 25},
-    {"to": "n8n-nodes-base.code", "count": 15}
+  "n8n-nodes-base.merge": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 25
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 14
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 13
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 12
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.convertToFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.ssh",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOneDrive",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.googleGemini",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-cloudflare-r2-storage.cloudflareR2Storage",
+      "count": 1
+    }
   ],
-  "n8n-nodes-base.scheduleTrigger": [
-    {"to": "n8n-nodes-base.httpRequest", "count": 60},
-    {"to": "n8n-nodes-base.googleSheets", "count": 30},
-    {"to": "n8n-nodes-base.gmail", "count": 20},
-    {"to": "n8n-nodes-base.postgres", "count": 18}
+  "@blotato/n8n-nodes-blotato.blotato": [
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 60
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 48
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    }
   ],
-  "n8n-nodes-base.webhook": [
-    {"to": "n8n-nodes-base.if", "count": 50},
-    {"to": "n8n-nodes-base.set", "count": 45},
-    {"to": "n8n-nodes-base.respondToWebhook", "count": 30},
-    {"to": "n8n-nodes-base.switch", "count": 20}
+  "n8n-nodes-base.telegram": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 14
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 11
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 11
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 5
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.ssh",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.mySql",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.notion",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.ftp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.textClassifier",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-tesseractjs.tesseractNode",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.html",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-upload-post.uploadPost",
+      "count": 1
+    },
+    {
+      "to": "@elevenlabs/n8n-nodes-elevenlabs.elevenLabs",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.wait": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 126
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 19
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 13
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.html",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-mcp.mcpClient",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.hubspot",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 1
+    },
+    {
+      "to": "@apify/n8n-nodes-apify.apify",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    },
+    {
+      "to": "@brightdata/n8n-nodes-brightdata.brightData",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.telegramTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 17
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 15
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.editImage",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.perplexity",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-supadata.supadata",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    }
   ],
   "n8n-nodes-base.httpRequest": [
-    {"to": "n8n-nodes-base.set", "count": 55},
-    {"to": "n8n-nodes-base.if", "count": 40},
-    {"to": "n8n-nodes-base.code", "count": 25},
-    {"to": "n8n-nodes-base.splitInBatches", "count": 15}
-  ],
-  "n8n-nodes-base.set": [
-    {"to": "n8n-nodes-base.if", "count": 45},
-    {"to": "n8n-nodes-base.httpRequest", "count": 30},
-    {"to": "n8n-nodes-base.googleSheets", "count": 25},
-    {"to": "n8n-nodes-base.slack", "count": 20}
-  ],
-  "n8n-nodes-base.if": [
-    {"to": "n8n-nodes-base.slack", "count": 35},
-    {"to": "n8n-nodes-base.set", "count": 30},
-    {"to": "n8n-nodes-base.noOp", "count": 25},
-    {"to": "n8n-nodes-base.gmail", "count": 20}
-  ],
-  "n8n-nodes-base.switch": [
-    {"to": "n8n-nodes-base.slack", "count": 25},
-    {"to": "n8n-nodes-base.set", "count": 20},
-    {"to": "n8n-nodes-base.merge", "count": 18}
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 172
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 134
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 110
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 77
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 57
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 36
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 33
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 32
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 29
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 28
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 20
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 12
+    },
+    {
+      "to": "n8n-nodes-base.html",
+      "count": 12
+    },
+    {
+      "to": "n8n-nodes-base.convertToFile",
+      "count": 12
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 8
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 6
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.xml",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.markdown",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.editImage",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.readWriteFile",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.mySql",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.perplexity",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-postiz.postiz",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.awsS3",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.asana",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-cloudinary.cloudinary",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.jira",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.ftp",
+      "count": 1
+    },
+    {
+      "to": "@bufferapp/n8n-nodes-buffer.buffer",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.writeBinaryFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.limit",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.box",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.dropbox",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wordpress",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.notion",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.clickUp",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.twitter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-upload-post.uploadPost",
+      "count": 1
+    }
   ],
   "n8n-nodes-base.code": [
-    {"to": "n8n-nodes-base.if", "count": 30},
-    {"to": "n8n-nodes-base.set", "count": 25},
-    {"to": "n8n-nodes-base.merge", "count": 15}
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 97
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 94
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 66
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 56
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 37
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 34
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 33
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 30
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 25
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 23
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 20
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 15
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 13
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 11
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 11
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.googleGemini",
+      "count": 11
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.crypto",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 5
+    },
+    {
+      "to": "@bedrijfsdatanl/n8n-nodes-prospectpro.prospectpro",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.notion",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.nocoDb",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 4
+    },
+    {
+      "to": "@apify/n8n-nodes-apify.apify",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.whatsApp",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.redis",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.convertToFile",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.microsoftTeams",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.readWriteFile",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.executeCommand",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.twitter",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.salesforce",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.sort",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-connectsafely-ai.connectSafelyLinkedIn",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOutlook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-work4all.work4all",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.sms77",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.hunter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.mailchimp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.n8n",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.perplexity",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.odoo",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gitlab",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-cloudflare-r2-storage.cloudflareR2Storage",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.googleSheets": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 47
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 42
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 33
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 24
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 24
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 23
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 22
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 17
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 16
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 14
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.limit",
+      "count": 7
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 5
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chat",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.discord",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.stopAndError",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.twitter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wooCommerce",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.set": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 96
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 93
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 70
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 53
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 52
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 41
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 35
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 21
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 19
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 19
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 17
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 15
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 11
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.rssFeedRead",
+      "count": 9
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.convertToFile",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.n8n",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.nocoDb",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.limit",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.reddit",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.removeDuplicates",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.summarize",
+      "count": 3
+    },
+    {
+      "to": "@apify/n8n-nodes-apify.apify",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.wordpress",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.whatsApp",
+      "count": 2
+    },
+    {
+      "to": "@bedrijfsdatanl/n8n-nodes-prospectpro.prospectpro",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 2
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.notion",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.crypto",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.zendesk",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.discord",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-browseract.browserAct",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.asana",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.twilio",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-resend.resend",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.github",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-zalo-bot-official.zaloBot",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOutlook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftExcel",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.itemLists",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.redis",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.memoryManager",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.compareDatasets",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.html",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.twitter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.evaluation",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.hackerNews",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-upload-post.uploadPost",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.sort",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreWeaviate",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.markdown",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.textClassifier",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.openAi": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 32
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 25
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 22
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 22
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 15
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 14
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.html",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.salesforce",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.readBinaryFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.whatsApp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.perplexity",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.twitter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.memoryManager",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-upload-post.uploadPost",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.perplexity": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.if": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 85
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 73
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 55
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 53
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 44
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 36
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 31
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 27
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 23
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 22
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 22
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 21
+    },
+    {
+      "to": "n8n-nodes-base.stopAndError",
+      "count": 16
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 15
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 13
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 12
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 11
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOneDrive",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.whatsApp",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOutlook",
+      "count": 4
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-resend.resend",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.hubspot",
+      "count": 3
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.convertToFile",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-upload-post.uploadPost",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.odoo",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.googleGemini",
+      "count": 2
+    },
+    {
+      "to": "@bedrijfsdatanl/n8n-nodes-prospectpro.prospectpro",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-uploadtourl.uploadToUrl",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.textClassifier",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.twitter",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.redis",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.discord",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-qdrant.qdrant",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.itemLists",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.removeDuplicates",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.sort",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.twilio",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.n8n",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-work4all.work4all",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.limit",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.reddit",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.notion",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.memoryManager",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-vtiger-crm.vtigerNode",
+      "count": 1
+    },
+    {
+      "to": "@brightdata/n8n-nodes-brightdata.brightData",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gitlab",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.html",
+      "count": 1
+    },
+    {
+      "to": "@verificaremails/n8n-nodes-verificaremails.verificaremails",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.trello",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.extractFromFile": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 17
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 7
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 4
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.convertToFile",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.googleDriveTrigger": [
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 11
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.salesforce": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.salesforce",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.googleDrive": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 24
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 18
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 14
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 4
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOneDrive",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.summarize",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.readWriteFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.writeBinaryFile",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    },
+    {
+      "to": "@vlm-run/n8n-nodes-vlmrun.vlmRun",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 1
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.emailSend": [
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.hubspot",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.postgres": [
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.readWriteFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.compareDatasets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.whatsApp",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.scheduleTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 49
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 43
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 25
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.rssFeedRead",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.perplexity",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOneDrive",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleAds",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.nocoDb",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-globals.globalConstants",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtop",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.dateTime",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.mySql",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-vtiger-crm.vtigerNode",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.webhook": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 23
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 8
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftExcel",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.readWriteFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.snowflake",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.n8n",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.agent": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 60
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 42
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 26
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 23
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 22
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 19
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 17
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 14
+    },
+    {
+      "to": "n8n-nodes-base.whatsApp",
+      "count": 13
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 12
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 4
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.markdown",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.notion",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-zalo-bot-official.zaloBot",
+      "count": 2
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.dateTime",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chat",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.evaluation",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.apiTemplateIo",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.discord",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.switch": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 71
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 59
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 51
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 17
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 15
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 13
+    },
+    {
+      "to": "n8n-nodes-base.whatsApp",
+      "count": 12
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 11
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.n8n",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.sendInBlue",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.github",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.ssh",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.mongoDb",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOutlook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.twitter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.debugHelper",
+      "count": 1
+    },
+    {
+      "to": "@apify/n8n-nodes-apify.apify",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.notion",
+      "count": 1
+    },
+    {
+      "to": "@elevenlabs/n8n-nodes-elevenlabs.elevenLabs",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.informationExtractor": [
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.aggregate": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 10
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 6
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-qdrant.qdrant",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.summarize",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.html",
+      "count": 1
+    },
+    {
+      "to": "@fal-ai/n8n-nodes-fal.falAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.markdown",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.dataTable": [
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.microsoftOneDrive": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOneDrive",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    }
   ],
   "n8n-nodes-base.splitInBatches": [
-    {"to": "n8n-nodes-base.httpRequest", "count": 35},
-    {"to": "n8n-nodes-base.wait", "count": 15}
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 38
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 17
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 14
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 11
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 8
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.rssFeedRead",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.compareDatasets",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-mcp.mcpClient",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOneDrive",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.convertToFile",
+      "count": 1
+    },
+    {
+      "to": "@cloudcli-ai/n8n-nodes-cloud-cli.cloudCli",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-snapshot-site.snapshotSite",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleAnalytics",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-craftmypdf.craftMyPdf",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.removeDuplicates",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.github",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.textClassifier",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-qdrant.qdrant",
+      "count": 1
+    }
   ],
-  "n8n-nodes-base.merge": [
-    {"to": "n8n-nodes-base.set", "count": 30},
-    {"to": "n8n-nodes-base.googleSheets", "count": 20},
-    {"to": "n8n-nodes-base.aggregate", "count": 15}
+  "n8n-nodes-base.compareDatasets": [
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 1
+    }
   ],
-  "n8n-nodes-base.openAi": [
-    {"to": "n8n-nodes-base.set", "count": 30},
-    {"to": "n8n-nodes-base.if", "count": 20},
-    {"to": "n8n-nodes-base.notion", "count": 15}
+  "@n8n/n8n-nodes-langchain.chainLlm": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 19
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 4
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 2
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-mcp.mcpClient",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.sendInBlue",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.formTrigger": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 18
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 17
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.n8n",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-ldxhub.ldxHub",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.mistralAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.readPDF",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.highLevel": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.highLevel",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.manualTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 39
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 31
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 17
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.nocoDb",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.n8n",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.readWriteFile",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.highLevel",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftExcel",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-globals.globalConstants",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtop",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.reddit",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.rssFeedRead",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-qdrant.qdrant",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-browseract-workflows.browserAct",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.summarize": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.localFileTrigger": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.vectorStorePGVector": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.readWriteFile": [
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.executeCommand",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.chatTrigger": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 47
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 4
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 4
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.googleAds": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.splitOut": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 22
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 12
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 11
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.rssFeedRead",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.removeDuplicates",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-oxylabs-ai-studio.oxylabsAiStudio",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.github",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.twitter",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.linkedIn",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.googleGemini",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.n8n",
+      "count": 1
+    },
+    {
+      "to": "@apify/n8n-nodes-apify.apify",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.convertToFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.summarize",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.limit",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.convertToFile": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.googleGemini",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-cloudinary.cloudinary",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.form",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.whatsApp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.googleGemini": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.googleGemini",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.rssFeedRead": [
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 12
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.limit",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.whatsAppTrigger": [
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.redis": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.googleSheetsTrigger": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 12
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 6
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.twilio",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.supabase": [
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "@apify/n8n-nodes-apify.apify",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.reddit",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "@apify/n8n-nodes-apify.apify": [
+    {
+      "to": "@apify/n8n-nodes-apify.apify",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.supabase",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.removeDuplicates",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.nocoDb": [
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.sort": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.limit",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.filter": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.removeDuplicates",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.sort",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.limit",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOutlook",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.postgres",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.compareDatasets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.hubspot",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.ssh": [
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-oxylabs-ai-studio.oxylabsAiStudio": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-base.removeDuplicates": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.sort",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.limit",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.html": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 2
+    },
+    {
+      "to": "@custom-js/n8n-nodes-pdf-toolkit-v2.pdfToolkit",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.convertToFile",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.mongoDb": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.itemLists": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.itemLists",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.n8n": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.form": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.crypto": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.crypto",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.gmail": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 15
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 14
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.guardrails",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.compareDatasets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.markdown",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.reddit": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.reddit",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.awsS3": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.gmailTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.textClassifier",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-parseur.parseur",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.guardrails": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.function": [
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.readWriteFile",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.wordpress": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    }
   ],
   "n8n-nodes-base.errorTrigger": [
-    {"to": "n8n-nodes-base.slack", "count": 40},
-    {"to": "n8n-nodes-base.gmail", "count": 20}
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.slack": [
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.webflow",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.discord": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.whatsApp": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.emailReadImap": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-globals.globalConstants",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.respondToWebhook": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.zendesk": [
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.noOp": [
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 9
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-snapshot-site.snapshotSite",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.html",
+      "count": 1
+    },
+    {
+      "to": "@brightdata/n8n-nodes-brightdata.brightData",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.slackTrigger": [
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.chat": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.linkedIn": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 8
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.limit": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-browseract.browserAct": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.editImage": [
+    {
+      "to": "n8n-nodes-base.editImage",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 6
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-postiz.postiz",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.asana": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.asana",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.googleDocs": [
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 10
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 3
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.aiTransform",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.airtable": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 6
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.readBinaryFile",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 2
+    },
+    {
+      "to": "@blotato/n8n-nodes-blotato.blotato",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.github": [
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.executeWorkflow": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 13
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 3
+    },
+    {
+      "to": "@bedrijfsdatanl/n8n-nodes-prospectpro.prospectpro",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.hubspot",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "@bedrijfsdatanl/n8n-nodes-prospectpro.prospectpro": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.stopAndError",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 1
+    }
+  ],
+  "@bedrijfsdatanl/n8n-nodes-prospectpro.prospectproTrigger": [
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.hubspot": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.executeWorkflowTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.switch",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.googleDocs",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 1
+    },
+    {
+      "to": "@bedrijfsdatanl/n8n-nodes-prospectpro.prospectpro",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.redis",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleDrive",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.snowflake",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.n8n",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.dataTable",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-uploadtourl.uploadToUrl": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    }
+  ],
+  "@custom-js/n8n-nodes-pdf-toolkit-v2.pdfToolkit": [
+    {
+      "to": "@custom-js/n8n-nodes-pdf-toolkit-v2.pdfToolkit",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.notion": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.slack",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.rssFeedReadTrigger": [
+    {
+      "to": "n8n-nodes-deapi.deapi",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    },
+    {
+      "to": "@apify/n8n-nodes-apify.apify",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-deapi.deapi": [
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.googleCalendar": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 7
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.cron": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-serpapi.serpApi",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-serpapi.serpApi": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-connectsafely-ai.connectSafelyLinkedIn": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.ftp": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-cloudinary.cloudinary": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.jira": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    }
+  ],
+  "@fal-ai/n8n-nodes-fal.falAi": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.twilio": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.typeformTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.twilioTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-resend.resend": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "@cloudcli-ai/n8n-nodes-cloud-cli.cloudCli": [
+    {
+      "to": "n8n-nodes-base.github",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-zalo-bot-official.zaloBotTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.microsoftOutlook": [
+    {
+      "to": "n8n-nodes-base.microsoftOutlook",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.executeWorkflow",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftOneDrive",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-work4all.work4all": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.textClassifier": [
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 17
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleCalendar",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-ldxhub.ldxHub": [
+    {
+      "to": "n8n-nodes-base.extractFromFile",
+      "count": 1
+    }
+  ],
+  "@bufferapp/n8n-nodes-buffer.buffer": [
+    {
+      "to": "@bufferapp/n8n-nodes-buffer.buffer",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.airtable",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.executeCommand": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.executeCommand",
+      "count": 3
+    }
+  ],
+  "n8n-nodes-snapshot-site.snapshotSite": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-parseur.parseurTrigger": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.microsoftExcel": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.microsoftExcel",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.facebookGraphApi": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 5
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 4
+    },
+    {
+      "to": "n8n-nodes-base.facebookGraphApi",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.vectorStoreQdrant": [
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 3
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.code": [
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.twitter": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.mySql",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.markdown": [
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 5
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.emailSend",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.writeBinaryFile": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.openAi",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-base.readBinaryFile": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 8
+    }
+  ],
+  "n8n-nodes-base.debugHelper": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.youTube": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.youTube",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.wait",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.vectorStoreSupabase": [
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.memoryManager": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.chainSummarization": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.vectorStorePinecone": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.sms77": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.dateTime": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.dateTime",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.aiTransform": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-base.hunter": [
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.googleCalendarTrigger": [
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-base.xml": [
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.googleAnalytics": [
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.webflow": [
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-tesseractjs.tesseractNode": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.snowflake": [
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-mcp.mcpClient": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.function",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.evaluation": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.noOp",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.evaluation",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.evaluationTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.apiTemplateIo": [
+    {
+      "to": "n8n-nodes-base.whatsApp",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.hackerNews": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-globals.globalConstants": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.sendInBlue": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-base.stripeTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-craftmypdf.craftMyPdf": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.airtop": [
+    {
+      "to": "n8n-nodes-base.airtop",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.splitOut",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.mailchimp": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "@n8n/n8n-nodes-langchain.vectorStoreWeaviate": [
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.mySql": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.aggregate",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.salesforceTrigger": [
+    {
+      "to": "n8n-nodes-base.salesforce",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-vtiger-crm.vtigerNode": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.clickUp": [
+    {
+      "to": "n8n-nodes-base.clickUp",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.gmail",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.calTrigger": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 4
+    }
+  ],
+  "n8n-nodes-base.microsoftOutlookTrigger": [
+    {
+      "to": "n8n-nodes-base.filter",
+      "count": 1
+    }
+  ],
+  "@brightdata/n8n-nodes-brightdata.brightData": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-base.odoo": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 3
+    },
+    {
+      "to": "n8n-nodes-base.executionData",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.executionData": [
+    {
+      "to": "n8n-nodes-base.respondToWebhook",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.postgresTrigger": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.mistralAi": [
+    {
+      "to": "@n8n/n8n-nodes-langchain.chainLlm",
+      "count": 1
+    }
+  ],
+  "@vlm-run/n8n-nodes-vlmrun.vlmRun": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-qdrant.qdrant": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.merge",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.wooCommerce": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.gitlab": [
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 2
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.gitlab",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.openAi": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-upload-post.uploadPost": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    }
+  ],
+  "@elevenlabs/n8n-nodes-elevenlabs.elevenLabs": [
+    {
+      "to": "n8n-nodes-base.telegram",
+      "count": 1
+    },
+    {
+      "to": "@n8n/n8n-nodes-langchain.agent",
+      "count": 1
+    }
+  ],
+  "@verificaremails/n8n-nodes-verificaremails.verificaremails": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-postiz.postiz": [
+    {
+      "to": "n8n-nodes-base.splitInBatches",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.jotFormTrigger": [
+    {
+      "to": "n8n-nodes-base.googleSheets",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.hubspot",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.httpRequest",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.set",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.readPDF": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-cloudflare-r2-storage.cloudflareR2Storage": [
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 2
+    }
+  ],
+  "n8n-nodes-browseract-workflows.browserAct": [
+    {
+      "to": "n8n-nodes-browseract-workflows.browserAct",
+      "count": 1
+    },
+    {
+      "to": "n8n-nodes-base.code",
+      "count": 1
+    }
+  ],
+  "n8n-nodes-base.trello": [
+    {
+      "to": "n8n-nodes-base.if",
+      "count": 1
+    }
   ]
 }

@@ -17,7 +17,13 @@ OUT_PATH = (
 
 
 def extract_edges(workflow: dict) -> list[tuple[str, str]]:
-    nodes_by_name = {n["name"]: n["type"] for n in workflow.get("nodes", [])}
+    # Real community-submitted templates aren't all well-formed — some node
+    # entries are missing "name" or "type" (seen in practice, not
+    # hypothetical). Skip those rather than letting one bad template crash
+    # the whole mining run.
+    nodes_by_name = {
+        n["name"]: n["type"] for n in workflow.get("nodes", []) if n.get("name") and n.get("type")
+    }
     edges = []
     connections = workflow.get("connections", {})
     for from_name, outputs in connections.items():
@@ -44,7 +50,13 @@ def main() -> None:
             data = json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             continue
-        workflow = data.get("workflow", data)  # API wraps it under "workflow" sometimes
+        # api.n8n.io wraps the actual n8n workflow (nodes + connections) two
+        # levels deep: {"workflow": {..template metadata.., "workflow": {...}}}.
+        # The outer "nodes" list is just a de-duplicated node-type summary for
+        # the template gallery UI (no connections) — easy to mistake for the
+        # real thing, which is why this unwraps two levels, not one.
+        outer = data.get("workflow", data)
+        workflow = outer.get("workflow", outer)
         for from_type, to_type in extract_edges(workflow):
             counts[from_type][to_type] += 1
 

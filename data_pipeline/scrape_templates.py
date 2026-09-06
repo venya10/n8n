@@ -22,12 +22,14 @@ OUT_DIR = Path(__file__).resolve().parent / "data" / "raw_templates"
 
 async def fetch_template_ids(client: httpx.AsyncClient, limit: int) -> list[int]:
     ids = []
-    page = 0
+    page = 1  # 1-indexed — the API silently ignores "skip"/"offset" and just
+    # re-returns page 1 for those, so this used to fetch the same 100
+    # templates forever regardless of `limit`.
     per_page = 100
     while len(ids) < limit:
         resp = await client.get(
             f"{API_BASE}/search",
-            params={"rows": per_page, "skip": page * per_page},
+            params={"rows": per_page, "page": page},
         )
         resp.raise_for_status()
         data = resp.json()

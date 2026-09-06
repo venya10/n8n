@@ -1,27 +1,1154 @@
 [
-  {"type": "n8n-nodes-base.manualTrigger", "display_name": "Manual Trigger", "category": "trigger", "description": "Starts the workflow manually when the user clicks execute. Used for testing or manually-run workflows."},
-  {"type": "n8n-nodes-base.scheduleTrigger", "display_name": "Schedule Trigger", "category": "trigger", "description": "Starts the workflow on a time-based schedule such as every hour, day, or via a cron expression."},
-  {"type": "n8n-nodes-base.webhook", "display_name": "Webhook", "category": "trigger", "description": "Starts the workflow when an HTTP request is received from an external service. Common entry point for integrations."},
-  {"type": "n8n-nodes-base.httpRequest", "display_name": "HTTP Request", "category": "action", "description": "Sends an HTTP request to any API or URL and returns the response. Used to call external services not covered by dedicated nodes."},
-  {"type": "n8n-nodes-base.set", "display_name": "Edit Fields (Set)", "category": "transform", "description": "Adds, edits, or removes fields on the incoming data items. Used to reshape or prepare data before the next step."},
-  {"type": "n8n-nodes-base.if", "display_name": "IF", "category": "flow", "description": "Routes items down one of two branches based on a true/false condition. Used for conditional logic."},
-  {"type": "n8n-nodes-base.switch", "display_name": "Switch", "category": "flow", "description": "Routes items down multiple branches based on matching rules or an expression. Used for multi-way conditional routing."},
-  {"type": "n8n-nodes-base.merge", "display_name": "Merge", "category": "flow", "description": "Combines data from two or more incoming branches into a single output, by appending, matching, or waiting for all inputs."},
-  {"type": "n8n-nodes-base.code", "display_name": "Code", "category": "transform", "description": "Runs custom JavaScript or Python code on the incoming items for advanced data transformation not possible with standard nodes."},
-  {"type": "n8n-nodes-base.filter", "display_name": "Filter", "category": "flow", "description": "Keeps only the items that match a given condition and discards the rest."},
-  {"type": "n8n-nodes-base.splitInBatches", "display_name": "Loop Over Items (Split in Batches)", "category": "flow", "description": "Processes incoming items in smaller batches or one at a time, useful for rate-limited APIs or large datasets."},
-  {"type": "n8n-nodes-base.slack", "display_name": "Slack", "category": "action", "description": "Sends messages, uploads files, or manages channels in Slack."},
-  {"type": "n8n-nodes-base.gmail", "display_name": "Gmail", "category": "action", "description": "Sends, reads, or searches emails through a Gmail account."},
-  {"type": "n8n-nodes-base.googleSheets", "display_name": "Google Sheets", "category": "action", "description": "Reads, appends, or updates rows in a Google Sheets spreadsheet."},
-  {"type": "n8n-nodes-base.postgres", "display_name": "Postgres", "category": "action", "description": "Runs queries or inserts/updates rows in a PostgreSQL database."},
-  {"type": "n8n-nodes-base.airtable", "display_name": "Airtable", "category": "action", "description": "Reads, creates, or updates records in an Airtable base."},
-  {"type": "n8n-nodes-base.notion", "display_name": "Notion", "category": "action", "description": "Creates or updates pages and database entries in Notion."},
-  {"type": "n8n-nodes-base.openAi", "display_name": "OpenAI", "category": "action", "description": "Sends prompts to an OpenAI model for text generation, classification, or summarization."},
-  {"type": "n8n-nodes-base.errorTrigger", "display_name": "Error Trigger", "category": "trigger", "description": "Starts a separate workflow whenever another workflow throws an error, used for alerting or cleanup."},
-  {"type": "n8n-nodes-base.noOp", "display_name": "No Operation", "category": "flow", "description": "Passes data through unchanged. Used as a placeholder or a merge point for readability."},
-  {"type": "n8n-nodes-base.wait", "display_name": "Wait", "category": "flow", "description": "Pauses the workflow execution for a set time or until a webhook is called, then resumes."},
-  {"type": "n8n-nodes-base.respondToWebhook", "display_name": "Respond to Webhook", "category": "action", "description": "Sends a custom HTTP response back to the caller of a webhook trigger, ending that execution branch."},
-  {"type": "n8n-nodes-base.aggregate", "display_name": "Aggregate", "category": "transform", "description": "Combines multiple items into a single item, for example summing values or collecting a list of fields."},
-  {"type": "n8n-nodes-base.dateTime", "display_name": "Date & Time", "category": "transform", "description": "Formats, parses, or performs calculations on date and time values."},
-  {"type": "n8n-nodes-base.telegram", "display_name": "Telegram", "category": "action", "description": "Sends or receives messages through a Telegram bot."}
+  {
+    "type": "n8n-nodes-base.manualTrigger",
+    "display_name": "Manual Trigger",
+    "category": "trigger",
+    "description": "Starts the workflow manually when the user clicks execute. Used for testing or manually-run workflows."
+  },
+  {
+    "type": "n8n-nodes-base.scheduleTrigger",
+    "display_name": "Schedule Trigger",
+    "category": "trigger",
+    "description": "Starts the workflow on a time-based schedule such as every hour, day, or via a cron expression."
+  },
+  {
+    "type": "n8n-nodes-base.webhook",
+    "display_name": "Webhook",
+    "category": "trigger",
+    "description": "Starts the workflow when an HTTP request is received from an external service. Common entry point for integrations."
+  },
+  {
+    "type": "n8n-nodes-base.httpRequest",
+    "display_name": "HTTP Request",
+    "category": "action",
+    "description": "Sends an HTTP request to any API or URL and returns the response. Used to call external services not covered by dedicated nodes."
+  },
+  {
+    "type": "n8n-nodes-base.set",
+    "display_name": "Edit Fields (Set)",
+    "category": "transform",
+    "description": "Adds, edits, or removes fields on the incoming data items. Used to reshape or prepare data before the next step."
+  },
+  {
+    "type": "n8n-nodes-base.if",
+    "display_name": "IF",
+    "category": "flow",
+    "description": "Routes items down one of two branches based on a true/false condition. Used for conditional logic."
+  },
+  {
+    "type": "n8n-nodes-base.switch",
+    "display_name": "Switch",
+    "category": "flow",
+    "description": "Routes items down multiple branches based on matching rules or an expression. Used for multi-way conditional routing."
+  },
+  {
+    "type": "n8n-nodes-base.merge",
+    "display_name": "Merge",
+    "category": "flow",
+    "description": "Combines data from two or more incoming branches into a single output, by appending, matching, or waiting for all inputs."
+  },
+  {
+    "type": "n8n-nodes-base.code",
+    "display_name": "Code",
+    "category": "transform",
+    "description": "Runs custom JavaScript or Python code on the incoming items for advanced data transformation not possible with standard nodes."
+  },
+  {
+    "type": "n8n-nodes-base.filter",
+    "display_name": "Filter",
+    "category": "flow",
+    "description": "Keeps only the items that match a given condition and discards the rest."
+  },
+  {
+    "type": "n8n-nodes-base.splitInBatches",
+    "display_name": "Loop Over Items (Split in Batches)",
+    "category": "flow",
+    "description": "Processes incoming items in smaller batches or one at a time, useful for rate-limited APIs or large datasets."
+  },
+  {
+    "type": "n8n-nodes-base.slack",
+    "display_name": "Slack",
+    "category": "action",
+    "description": "Sends messages, uploads files, or manages channels in Slack."
+  },
+  {
+    "type": "n8n-nodes-base.gmail",
+    "display_name": "Gmail",
+    "category": "action",
+    "description": "Sends, reads, or searches emails through a Gmail account."
+  },
+  {
+    "type": "n8n-nodes-base.googleSheets",
+    "display_name": "Google Sheets",
+    "category": "action",
+    "description": "Reads, appends, or updates rows in a Google Sheets spreadsheet."
+  },
+  {
+    "type": "n8n-nodes-base.postgres",
+    "display_name": "Postgres",
+    "category": "action",
+    "description": "Runs queries or inserts/updates rows in a PostgreSQL database."
+  },
+  {
+    "type": "n8n-nodes-base.airtable",
+    "display_name": "Airtable",
+    "category": "action",
+    "description": "Reads, creates, or updates records in an Airtable base."
+  },
+  {
+    "type": "n8n-nodes-base.notion",
+    "display_name": "Notion",
+    "category": "action",
+    "description": "Creates or updates pages and database entries in Notion."
+  },
+  {
+    "type": "n8n-nodes-base.openAi",
+    "display_name": "OpenAI",
+    "category": "action",
+    "description": "Sends prompts to an OpenAI model for text generation, classification, or summarization."
+  },
+  {
+    "type": "n8n-nodes-base.errorTrigger",
+    "display_name": "Error Trigger",
+    "category": "trigger",
+    "description": "Starts a separate workflow whenever another workflow throws an error, used for alerting or cleanup."
+  },
+  {
+    "type": "n8n-nodes-base.noOp",
+    "display_name": "No Operation",
+    "category": "flow",
+    "description": "Passes data through unchanged. Used as a placeholder or a merge point for readability."
+  },
+  {
+    "type": "n8n-nodes-base.wait",
+    "display_name": "Wait",
+    "category": "flow",
+    "description": "Pauses the workflow execution for a set time or until a webhook is called, then resumes."
+  },
+  {
+    "type": "n8n-nodes-base.respondToWebhook",
+    "display_name": "Respond to Webhook",
+    "category": "action",
+    "description": "Sends a custom HTTP response back to the caller of a webhook trigger, ending that execution branch."
+  },
+  {
+    "type": "n8n-nodes-base.aggregate",
+    "display_name": "Aggregate",
+    "category": "transform",
+    "description": "Combines multiple items into a single item, for example summing values or collecting a list of fields."
+  },
+  {
+    "type": "n8n-nodes-base.dateTime",
+    "display_name": "Date & Time",
+    "category": "transform",
+    "description": "Formats, parses, or performs calculations on date and time values."
+  },
+  {
+    "type": "n8n-nodes-base.telegram",
+    "display_name": "Telegram",
+    "category": "action",
+    "description": "Sends or receives messages through a Telegram bot."
+  },
+  {
+    "type": "n8n-nodes-base.telegramTrigger",
+    "display_name": "Telegram Trigger",
+    "category": "trigger",
+    "description": "Starts the workflow when a message or event arrives in a connected Telegram bot."
+  },
+  {
+    "type": "n8n-nodes-base.stickyNote",
+    "display_name": "Sticky Note",
+    "category": "action",
+    "description": "TODO: write a real description for Sticky Note."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.openAi",
+    "display_name": "OpenAI",
+    "category": "action",
+    "description": "Sends a prompt to an OpenAI model (chat, image, or audio) and returns the generated result."
+  },
+  {
+    "type": "n8n-nodes-base.perplexity",
+    "display_name": "Perplexity",
+    "category": "action",
+    "description": "TODO: write a real description for Perplexity."
+  },
+  {
+    "type": "n8n-nodes-base.googleDrive",
+    "display_name": "Google Drive",
+    "category": "action",
+    "description": "Uploads, downloads, moves, or searches files and folders in Google Drive."
+  },
+  {
+    "type": "n8n-nodes-base.googleSheetsTrigger",
+    "display_name": "Google Sheets Trigger",
+    "category": "trigger",
+    "description": "Starts the workflow when a row is added or a cell changes in a watched Google Sheet."
+  },
+  {
+    "type": "n8n-nodes-base.emailSend",
+    "display_name": "Send Email",
+    "category": "action",
+    "description": "Sends an email via SMTP, with optional attachments."
+  },
+  {
+    "type": "n8n-nodes-base.itemLists",
+    "display_name": "Item Lists",
+    "category": "action",
+    "description": "TODO: write a real description for Item Lists."
+  },
+  {
+    "type": "n8n-nodes-base.formTrigger",
+    "display_name": "n8n Form Trigger",
+    "category": "trigger",
+    "description": "Starts the workflow when someone submits n8n's built-in web form \u2014 no external service needed to collect input."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.agent",
+    "display_name": "AI Agent",
+    "category": "action",
+    "description": "Runs an autonomous LLM agent that can reason over the input and call other connected tools/nodes to complete a task, rather than just generating a single text response."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+    "display_name": "OpenAI Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for OpenAI Chat Model."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+    "display_name": "Structured Output Parser",
+    "category": "action",
+    "description": "TODO: write a real description for Structured Output Parser."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.toolThink",
+    "display_name": "Think Tool",
+    "category": "action",
+    "description": "TODO: write a real description for Think Tool."
+  },
+  {
+    "type": "n8n-nodes-base.nocoDb",
+    "display_name": "NocoDB",
+    "category": "action",
+    "description": "TODO: write a real description for NocoDB."
+  },
+  {
+    "type": "n8n-nodes-base.splitOut",
+    "display_name": "Split Out",
+    "category": "transform",
+    "description": "Splits a single item's array field into multiple separate items, one per array element, so downstream nodes process them individually."
+  },
+  {
+    "type": "n8n-nodes-base.emailReadImap",
+    "display_name": "Email Trigger (IMAP)",
+    "category": "action",
+    "description": "TODO: write a real description for Email Trigger (IMAP)."
+  },
+  {
+    "type": "n8n-nodes-base.discord",
+    "display_name": "Discord",
+    "category": "action",
+    "description": "TODO: write a real description for Discord."
+  },
+  {
+    "type": "n8n-nodes-base.zendesk",
+    "display_name": "Zendesk",
+    "category": "action",
+    "description": "TODO: write a real description for Zendesk."
+  },
+  {
+    "type": "n8n-nodes-base.supabase",
+    "display_name": "Supabase",
+    "category": "action",
+    "description": "Reads, writes, or queries rows in a Supabase (Postgres-backed) table."
+  },
+  {
+    "type": "n8n-nodes-base.whatsApp",
+    "display_name": "WhatsApp Business Cloud",
+    "category": "action",
+    "description": "Sends or receives WhatsApp messages via Meta's WhatsApp Business Cloud API."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.chainLlm",
+    "display_name": "Basic LLM Chain",
+    "category": "action",
+    "description": "Sends a prompt (with an optional template) to a connected LLM and returns its response \u2014 a single-step chain, no tool use or memory."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+    "display_name": "Embeddings OpenAI",
+    "category": "action",
+    "description": "TODO: write a real description for Embeddings OpenAI."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+    "display_name": "Recursive Character Text Splitter",
+    "category": "action",
+    "description": "TODO: write a real description for Recursive Character Text Splitter."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+    "display_name": "Supabase Vector Store",
+    "category": "action",
+    "description": "TODO: write a real description for Supabase Vector Store."
+  },
+  {
+    "type": "n8n-nodes-base.removeDuplicates",
+    "display_name": "Remove Duplicates",
+    "category": "transform",
+    "description": "Filters out items that duplicate ones seen earlier in the same run or a previous run, based on chosen fields."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+    "display_name": "Default Data Loader",
+    "category": "action",
+    "description": "TODO: write a real description for Default Data Loader."
+  },
+  {
+    "type": "n8n-nodes-base.whatsAppTrigger",
+    "display_name": "WhatsApp Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for WhatsApp Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.slackTrigger",
+    "display_name": "Slack Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Slack Trigger."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+    "display_name": "Postgres Chat Memory",
+    "category": "action",
+    "description": "TODO: write a real description for Postgres Chat Memory."
+  },
+  {
+    "type": "n8n-nodes-base.editImage",
+    "display_name": "Edit Image",
+    "category": "transform",
+    "description": "Resizes, crops, rotates, or overlays text/images on an incoming binary image."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+    "display_name": "Simple Memory",
+    "category": "action",
+    "description": "TODO: write a real description for Simple Memory."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+    "display_name": "OpenRouter Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for OpenRouter Chat Model."
+  },
+  {
+    "type": "n8n-nodes-base.gmailTrigger",
+    "display_name": "Gmail Trigger",
+    "category": "trigger",
+    "description": "Starts the workflow when a new email matching a filter arrives in a connected Gmail account."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+    "display_name": "Google Gemini Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for Google Gemini Chat Model."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.googleGemini",
+    "display_name": "Google Gemini",
+    "category": "action",
+    "description": "Sends a prompt to a Google Gemini model and returns the generated result."
+  },
+  {
+    "type": "n8n-nodes-base.convertToFile",
+    "display_name": "Convert to File",
+    "category": "transform",
+    "description": "Converts workflow JSON data into a binary file (CSV, JSON, ICS, etc.) for output or attachment."
+  },
+  {
+    "type": "n8n-nodes-base.microsoftExcel",
+    "display_name": "Microsoft Excel 365",
+    "category": "action",
+    "description": "TODO: write a real description for Microsoft Excel 365."
+  },
+  {
+    "type": "n8n-nodes-base.html",
+    "display_name": "HTML",
+    "category": "transform",
+    "description": "Extracts data from HTML content using CSS selectors, or builds an HTML string from workflow data."
+  },
+  {
+    "type": "n8n-nodes-base.dropbox",
+    "display_name": "Dropbox",
+    "category": "action",
+    "description": "TODO: write a real description for Dropbox."
+  },
+  {
+    "type": "n8n-nodes-base.box",
+    "display_name": "Box",
+    "category": "action",
+    "description": "TODO: write a real description for Box."
+  },
+  {
+    "type": "n8n-nodes-base.youTube",
+    "display_name": "YouTube",
+    "category": "action",
+    "description": "Uploads videos or reads channel/video data via the YouTube API."
+  },
+  {
+    "type": "n8n-nodes-base.googleDocs",
+    "display_name": "Google Docs",
+    "category": "action",
+    "description": "Creates, reads, or updates the content of a Google Docs document."
+  },
+  {
+    "type": "n8n-nodes-base.extractFromFile",
+    "display_name": "Extract from File",
+    "category": "transform",
+    "description": "Extracts text or structured data out of a binary file (PDF, CSV, spreadsheet, etc.) into workflow JSON."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
+    "display_name": "MongoDB Atlas Vector Store",
+    "category": "action",
+    "description": "TODO: write a real description for MongoDB Atlas Vector Store."
+  },
+  {
+    "type": "n8n-nodes-base.aiTransform",
+    "display_name": "AI Transform",
+    "category": "action",
+    "description": "TODO: write a real description for AI Transform."
+  },
+  {
+    "type": "n8n-nodes-base.linkedIn",
+    "display_name": "LinkedIn",
+    "category": "action",
+    "description": "Posts content or reads profile/company data via the LinkedIn API."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+    "display_name": "Simple Vector Store",
+    "category": "action",
+    "description": "TODO: write a real description for Simple Vector Store."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+    "display_name": "Chat Trigger",
+    "category": "trigger",
+    "description": "Starts the workflow from n8n's built-in chat widget, turning the workflow into a conversational chatbot."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+    "display_name": "Ollama Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for Ollama Chat Model."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+    "display_name": "Qdrant Vector Store",
+    "category": "action",
+    "description": "TODO: write a real description for Qdrant Vector Store."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+    "display_name": "Embeddings Ollama",
+    "category": "action",
+    "description": "TODO: write a real description for Embeddings Ollama."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+    "display_name": "Groq Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for Groq Chat Model."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.toolCode",
+    "display_name": "Code Tool",
+    "category": "transform",
+    "description": "TODO: write a real description for Code Tool."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+    "display_name": "Wikipedia",
+    "category": "action",
+    "description": "TODO: write a real description for Wikipedia."
+  },
+  {
+    "type": "n8n-nodes-base.cron",
+    "display_name": "Cron",
+    "category": "action",
+    "description": "TODO: write a real description for Cron."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+    "display_name": "Auto-fixing Output Parser",
+    "category": "action",
+    "description": "TODO: write a real description for Auto-fixing Output Parser."
+  },
+  {
+    "type": "n8n-nodes-base.executeWorkflowTrigger",
+    "display_name": "Execute Workflow Trigger",
+    "category": "trigger",
+    "description": "Marks a workflow as callable by an Execute Sub-workflow node from another workflow, and defines the inputs it expects."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+    "display_name": "Call n8n Workflow Tool",
+    "category": "action",
+    "description": "TODO: write a real description for Call n8n Workflow Tool."
+  },
+  {
+    "type": "n8n-nodes-base.wooCommerce",
+    "display_name": "WooCommerce",
+    "category": "action",
+    "description": "TODO: write a real description for WooCommerce."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+    "display_name": "MCP Client Tool",
+    "category": "action",
+    "description": "TODO: write a real description for MCP Client Tool."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+    "display_name": "MCP Server Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for MCP Server Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.executeWorkflow",
+    "display_name": "Execute Sub-workflow",
+    "category": "action",
+    "description": "Calls another n8n workflow as a reusable sub-routine and passes data into it."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+    "display_name": "MongoDB Chat Memory",
+    "category": "action",
+    "description": "TODO: write a real description for MongoDB Chat Memory."
+  },
+  {
+    "type": "n8n-nodes-base.jotFormTrigger",
+    "display_name": "Jotform Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Jotform Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.form",
+    "display_name": "n8n Form",
+    "category": "action",
+    "description": "Renders an additional page/step in a multi-step n8n form flow, collecting more input from the same user session."
+  },
+  {
+    "type": "n8n-nodes-base.dataTable",
+    "display_name": "Data table",
+    "category": "action",
+    "description": "Reads or writes rows in an n8n Data Table \u2014 a small built-in database for persisting data between workflow runs."
+  },
+  {
+    "type": "n8n-nodes-base.microsoftOneDrive",
+    "display_name": "Microsoft OneDrive",
+    "category": "action",
+    "description": "Uploads, downloads, or searches files and folders in OneDrive."
+  },
+  {
+    "type": "n8n-nodes-base.salesforce",
+    "display_name": "Salesforce",
+    "category": "action",
+    "description": "TODO: write a real description for Salesforce."
+  },
+  {
+    "type": "n8n-nodes-base.googleDriveTrigger",
+    "display_name": "Google Drive Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Google Drive Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.microsoftOutlook",
+    "display_name": "Microsoft Outlook",
+    "category": "action",
+    "description": "TODO: write a real description for Microsoft Outlook."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+    "display_name": "Information Extractor",
+    "category": "action",
+    "description": "Uses an LLM to pull structured fields (per a defined schema) out of unstructured input text."
+  },
+  {
+    "type": "n8n-nodes-base.compareDatasets",
+    "display_name": "Compare Datasets",
+    "category": "transform",
+    "description": "TODO: write a real description for Compare Datasets."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+    "display_name": "Mistral Cloud Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for Mistral Cloud Chat Model."
+  },
+  {
+    "type": "n8n-nodes-base.highLevel",
+    "display_name": "HighLevel",
+    "category": "action",
+    "description": "TODO: write a real description for HighLevel."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatAzureOpenAi",
+    "display_name": "Azure OpenAI Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for Azure OpenAI Chat Model."
+  },
+  {
+    "type": "n8n-nodes-base.localFileTrigger",
+    "display_name": "Local File Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Local File Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.readWriteFile",
+    "display_name": "Read/Write Files from Disk",
+    "category": "action",
+    "description": "Reads a file from, or writes workflow data to, the local disk the n8n instance runs on."
+  },
+  {
+    "type": "n8n-nodes-base.summarize",
+    "display_name": "Summarize",
+    "category": "action",
+    "description": "TODO: write a real description for Summarize."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+    "display_name": "Postgres PGVector Store",
+    "category": "action",
+    "description": "TODO: write a real description for Postgres PGVector Store."
+  },
+  {
+    "type": "n8n-nodes-base.googleAds",
+    "display_name": "Google Ads",
+    "category": "action",
+    "description": "TODO: write a real description for Google Ads."
+  },
+  {
+    "type": "n8n-nodes-base.rssFeedRead",
+    "display_name": "RSS Read",
+    "category": "action",
+    "description": "Fetches and parses items from an RSS/Atom feed URL."
+  },
+  {
+    "type": "n8n-nodes-base.redis",
+    "display_name": "Redis",
+    "category": "action",
+    "description": "TODO: write a real description for Redis."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.modelSelector",
+    "display_name": "Model Selector",
+    "category": "action",
+    "description": "TODO: write a real description for Model Selector."
+  },
+  {
+    "type": "n8n-nodes-base.sort",
+    "display_name": "Sort",
+    "category": "action",
+    "description": "TODO: write a real description for Sort."
+  },
+  {
+    "type": "n8n-nodes-base.ssh",
+    "display_name": "SSH",
+    "category": "action",
+    "description": "TODO: write a real description for SSH."
+  },
+  {
+    "type": "n8n-nodes-base.mongoDb",
+    "display_name": "MongoDB",
+    "category": "action",
+    "description": "TODO: write a real description for MongoDB."
+  },
+  {
+    "type": "n8n-nodes-base.stopAndError",
+    "display_name": "Stop and Error",
+    "category": "flow",
+    "description": "Deliberately fails the workflow execution with a custom error message \u2014 used to halt on a condition that shouldn't continue."
+  },
+  {
+    "type": "n8n-nodes-base.n8n",
+    "display_name": "n8n",
+    "category": "action",
+    "description": "Calls n8n's own management API \u2014 listing, triggering, or updating other workflows/executions on the same instance."
+  },
+  {
+    "type": "n8n-nodes-base.crypto",
+    "display_name": "Crypto",
+    "category": "transform",
+    "description": "Hashes, signs, or encrypts/decrypts data (e.g. HMAC, SHA256, RSA) within the workflow."
+  },
+  {
+    "type": "n8n-nodes-base.reddit",
+    "display_name": "Reddit",
+    "category": "action",
+    "description": "TODO: write a real description for Reddit."
+  },
+  {
+    "type": "n8n-nodes-base.awsS3",
+    "display_name": "AWS S3",
+    "category": "action",
+    "description": "TODO: write a real description for AWS S3."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.guardrails",
+    "display_name": "Guardrails",
+    "category": "action",
+    "description": "TODO: write a real description for Guardrails."
+  },
+  {
+    "type": "n8n-nodes-base.function",
+    "display_name": "Function",
+    "category": "transform",
+    "description": "Runs custom JavaScript against the input items \u2014 the older, single-item-at-a-time predecessor to the Code node."
+  },
+  {
+    "type": "n8n-nodes-base.wordpress",
+    "display_name": "Wordpress",
+    "category": "action",
+    "description": "TODO: write a real description for Wordpress."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.chat",
+    "display_name": "Chat",
+    "category": "action",
+    "description": "TODO: write a real description for Chat."
+  },
+  {
+    "type": "n8n-nodes-base.limit",
+    "display_name": "Limit",
+    "category": "flow",
+    "description": "Caps the number of items passed downstream, keeping only the first N (or last N) items."
+  },
+  {
+    "type": "n8n-nodes-base.asana",
+    "display_name": "Asana",
+    "category": "action",
+    "description": "TODO: write a real description for Asana."
+  },
+  {
+    "type": "n8n-nodes-base.github",
+    "display_name": "GitHub",
+    "category": "action",
+    "description": "TODO: write a real description for GitHub."
+  },
+  {
+    "type": "n8n-nodes-base.hubspot",
+    "display_name": "HubSpot",
+    "category": "action",
+    "description": "TODO: write a real description for HubSpot."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+    "display_name": "Anthropic Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for Anthropic Chat Model."
+  },
+  {
+    "type": "n8n-nodes-base.rssFeedReadTrigger",
+    "display_name": "RSS Feed Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for RSS Feed Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.googleCalendar",
+    "display_name": "Google Calendar",
+    "category": "action",
+    "description": "Creates, updates, or looks up events on a Google Calendar."
+  },
+  {
+    "type": "n8n-nodes-base.ftp",
+    "display_name": "FTP",
+    "category": "action",
+    "description": "TODO: write a real description for FTP."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+    "display_name": "Calculator",
+    "category": "action",
+    "description": "TODO: write a real description for Calculator."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+    "display_name": "Reranker Cohere",
+    "category": "action",
+    "description": "TODO: write a real description for Reranker Cohere."
+  },
+  {
+    "type": "n8n-nodes-base.jira",
+    "display_name": "Jira Software",
+    "category": "action",
+    "description": "TODO: write a real description for Jira Software."
+  },
+  {
+    "type": "n8n-nodes-base.twilio",
+    "display_name": "Twilio",
+    "category": "action",
+    "description": "TODO: write a real description for Twilio."
+  },
+  {
+    "type": "n8n-nodes-base.typeformTrigger",
+    "display_name": "Typeform Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Typeform Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.twilioTrigger",
+    "display_name": "Twilio Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Twilio Trigger."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+    "display_name": "Embeddings Google Gemini",
+    "category": "action",
+    "description": "TODO: write a real description for Embeddings Google Gemini."
+  },
+  {
+    "type": "n8n-nodes-base.microsoftTeams",
+    "display_name": "Microsoft Teams",
+    "category": "action",
+    "description": "TODO: write a real description for Microsoft Teams."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.textClassifier",
+    "display_name": "Text Classifier",
+    "category": "action",
+    "description": "Uses an LLM to sort input text into one of several predefined categories."
+  },
+  {
+    "type": "n8n-nodes-base.executeCommand",
+    "display_name": "Execute Command",
+    "category": "action",
+    "description": "TODO: write a real description for Execute Command."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+    "display_name": "Vector Store Question Answer Tool",
+    "category": "action",
+    "description": "TODO: write a real description for Vector Store Question Answer Tool."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+    "display_name": "Pinecone Vector Store",
+    "category": "action",
+    "description": "TODO: write a real description for Pinecone Vector Store."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+    "display_name": "HTTP Request Tool",
+    "category": "action",
+    "description": "TODO: write a real description for HTTP Request Tool."
+  },
+  {
+    "type": "n8n-nodes-base.facebookGraphApi",
+    "display_name": "Facebook Graph API",
+    "category": "action",
+    "description": "Makes a call to Meta's Graph API for Facebook/Instagram \u2014 posting, reading, or managing pages and content."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.code",
+    "display_name": "LangChain Code",
+    "category": "transform",
+    "description": "TODO: write a real description for LangChain Code."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.textSplitterTokenSplitter",
+    "display_name": "Token Splitter",
+    "category": "action",
+    "description": "TODO: write a real description for Token Splitter."
+  },
+  {
+    "type": "n8n-nodes-base.twitter",
+    "display_name": "X (Formerly Twitter)",
+    "category": "action",
+    "description": "Posts, reads, or searches posts on X (Twitter) via its API."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+    "display_name": "SerpApi (Google Search)",
+    "category": "action",
+    "description": "TODO: write a real description for SerpApi (Google Search)."
+  },
+  {
+    "type": "n8n-nodes-base.markdown",
+    "display_name": "Markdown",
+    "category": "transform",
+    "description": "Converts Markdown text to HTML, or HTML back to Markdown."
+  },
+  {
+    "type": "n8n-nodes-base.readBinaryFile",
+    "display_name": "Read Binary File",
+    "category": "action",
+    "description": "TODO: write a real description for Read Binary File."
+  },
+  {
+    "type": "n8n-nodes-base.writeBinaryFile",
+    "display_name": "Write Binary File",
+    "category": "action",
+    "description": "TODO: write a real description for Write Binary File."
+  },
+  {
+    "type": "n8n-nodes-base.debugHelper",
+    "display_name": "DebugHelper",
+    "category": "action",
+    "description": "TODO: write a real description for DebugHelper."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.memoryManager",
+    "display_name": "Chat Memory Manager",
+    "category": "action",
+    "description": "TODO: write a real description for Chat Memory Manager."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+    "display_name": "Summarization Chain",
+    "category": "action",
+    "description": "TODO: write a real description for Summarization Chain."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+    "display_name": "Question and Answer Chain",
+    "category": "action",
+    "description": "TODO: write a real description for Question and Answer Chain."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.retrieverVectorStore",
+    "display_name": "Vector Store Retriever",
+    "category": "action",
+    "description": "TODO: write a real description for Vector Store Retriever."
+  },
+  {
+    "type": "n8n-nodes-base.apiTemplateIo",
+    "display_name": "APITemplate.io",
+    "category": "action",
+    "description": "TODO: write a real description for APITemplate.io."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmOpenHuggingFaceInference",
+    "display_name": "Hugging Face Inference Model",
+    "category": "action",
+    "description": "TODO: write a real description for Hugging Face Inference Model."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+    "display_name": "DeepSeek Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for DeepSeek Chat Model."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+    "display_name": "xAI Grok Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for xAI Grok Chat Model."
+  },
+  {
+    "type": "n8n-nodes-base.sms77",
+    "display_name": "seven",
+    "category": "action",
+    "description": "TODO: write a real description for seven."
+  },
+  {
+    "type": "n8n-nodes-base.hunter",
+    "display_name": "Hunter",
+    "category": "action",
+    "description": "TODO: write a real description for Hunter."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+    "display_name": "Embeddings Cohere",
+    "category": "action",
+    "description": "TODO: write a real description for Embeddings Cohere."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmOllama",
+    "display_name": "Ollama Model",
+    "category": "action",
+    "description": "TODO: write a real description for Ollama Model."
+  },
+  {
+    "type": "n8n-nodes-base.googleCalendarTrigger",
+    "display_name": "Google Calendar Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Google Calendar Trigger."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.toolSearXng",
+    "display_name": "SearXNG",
+    "category": "action",
+    "description": "TODO: write a real description for SearXNG."
+  },
+  {
+    "type": "n8n-nodes-base.xml",
+    "display_name": "XML",
+    "category": "action",
+    "description": "TODO: write a real description for XML."
+  },
+  {
+    "type": "n8n-nodes-base.googleAnalytics",
+    "display_name": "Google Analytics",
+    "category": "action",
+    "description": "TODO: write a real description for Google Analytics."
+  },
+  {
+    "type": "n8n-nodes-base.webflow",
+    "display_name": "Webflow",
+    "category": "action",
+    "description": "TODO: write a real description for Webflow."
+  },
+  {
+    "type": "n8n-nodes-base.snowflake",
+    "display_name": "Snowflake",
+    "category": "action",
+    "description": "TODO: write a real description for Snowflake."
+  },
+  {
+    "type": "n8n-nodes-base.evaluationTrigger",
+    "display_name": "Evaluation Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Evaluation Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.evaluation",
+    "display_name": "Evaluation",
+    "category": "action",
+    "description": "TODO: write a real description for Evaluation."
+  },
+  {
+    "type": "n8n-nodes-base.hackerNews",
+    "display_name": "Hacker News",
+    "category": "action",
+    "description": "TODO: write a real description for Hacker News."
+  },
+  {
+    "type": "n8n-nodes-base.stripeTrigger",
+    "display_name": "Stripe Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Stripe Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.sendInBlue",
+    "display_name": "Brevo",
+    "category": "action",
+    "description": "TODO: write a real description for Brevo."
+  },
+  {
+    "type": "n8n-nodes-base.airtop",
+    "display_name": "Airtop",
+    "category": "action",
+    "description": "TODO: write a real description for Airtop."
+  },
+  {
+    "type": "n8n-nodes-base.mailchimp",
+    "display_name": "Mailchimp",
+    "category": "action",
+    "description": "TODO: write a real description for Mailchimp."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.vectorStoreWeaviate",
+    "display_name": "Weaviate Vector Store",
+    "category": "action",
+    "description": "TODO: write a real description for Weaviate Vector Store."
+  },
+  {
+    "type": "n8n-nodes-base.mySql",
+    "display_name": "MySQL",
+    "category": "action",
+    "description": "TODO: write a real description for MySQL."
+  },
+  {
+    "type": "n8n-nodes-base.salesforceTrigger",
+    "display_name": "Salesforce Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Salesforce Trigger."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.lmChatGoogleVertex",
+    "display_name": "Google Vertex Chat Model",
+    "category": "action",
+    "description": "TODO: write a real description for Google Vertex Chat Model."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.embeddingsAzureOpenAi",
+    "display_name": "Embeddings Azure OpenAI",
+    "category": "action",
+    "description": "TODO: write a real description for Embeddings Azure OpenAI."
+  },
+  {
+    "type": "n8n-nodes-base.clickUp",
+    "display_name": "ClickUp",
+    "category": "action",
+    "description": "TODO: write a real description for ClickUp."
+  },
+  {
+    "type": "n8n-nodes-base.calTrigger",
+    "display_name": "Cal.com Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Cal.com Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.microsoftOutlookTrigger",
+    "display_name": "Microsoft Outlook Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Microsoft Outlook Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.odoo",
+    "display_name": "Odoo",
+    "category": "action",
+    "description": "TODO: write a real description for Odoo."
+  },
+  {
+    "type": "n8n-nodes-base.executionData",
+    "display_name": "Execution Data",
+    "category": "action",
+    "description": "TODO: write a real description for Execution Data."
+  },
+  {
+    "type": "n8n-nodes-base.postgresTrigger",
+    "display_name": "Postgres Trigger",
+    "category": "trigger",
+    "description": "TODO: write a real description for Postgres Trigger."
+  },
+  {
+    "type": "n8n-nodes-base.mistralAi",
+    "display_name": "Mistral AI",
+    "category": "action",
+    "description": "TODO: write a real description for Mistral AI."
+  },
+  {
+    "type": "n8n-nodes-base.gitlab",
+    "display_name": "GitLab",
+    "category": "action",
+    "description": "TODO: write a real description for GitLab."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.agentTool",
+    "display_name": "AI Agent Tool",
+    "category": "action",
+    "description": "TODO: write a real description for AI Agent Tool."
+  },
+  {
+    "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+    "display_name": "Redis Chat Memory",
+    "category": "action",
+    "description": "TODO: write a real description for Redis Chat Memory."
+  },
+  {
+    "type": "n8n-nodes-base.readPDF",
+    "display_name": "Read PDF",
+    "category": "action",
+    "description": "TODO: write a real description for Read PDF."
+  },
+  {
+    "type": "n8n-nodes-base.trello",
+    "display_name": "Trello",
+    "category": "action",
+    "description": "TODO: write a real description for Trello."
+  }
 ]

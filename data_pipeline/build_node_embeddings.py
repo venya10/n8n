@@ -1,13 +1,21 @@
 """Collects the unique node types seen across the scraped templates and
 writes backend/app/data/node_metadata.json.
 
-n8n's template API doesn't include human-written node descriptions, so this
-script pulls the display name from the template node data and leaves
-`description` as a generic placeholder for node types not already present in
-the existing node_metadata.json (which was hand-curated for the most common
-nodes). Review the output and fill in real descriptions for anything new —
-description quality directly drives semantic search quality, so this step is
-worth doing by hand rather than trusting the placeholder text.
+Each downloaded template file is api.n8n.io's response shape:
+{"workflow": {..template metadata.., "nodes": [<node-type summary, no
+connections>, ...], "workflow": {..the actual n8n workflow..}}}. The outer
+"nodes" list is a de-duplicated summary used by the template gallery UI —
+it already carries each node type's real `displayName`, which is more
+reliable than guessing one from the type string, so that's what this script
+reads (see build_transitions.py for why the *inner* "workflow" key holds the
+real node instances + connections instead).
+
+n8n's template API doesn't include human-written node descriptions, so
+`description` stays a generic placeholder for node types not already present
+in the existing node_metadata.json (which was hand-curated for the most
+common nodes). Review the output and fill in real descriptions for anything
+new — description quality directly drives semantic search quality, so this
+step is worth doing by hand rather than trusting the placeholder text.
 
 Usage:
     python build_node_embeddings.py
@@ -45,17 +53,11 @@ def main() -> None:
             data = json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             continue
-        workflow = data.get("workflow", data)
-        for node in workflow.get("nodes", []):
-            node_type = node.get("type")
+        outer = data.get("workflow", data)
+        for node in outer.get("nodes", []):
+            node_type = node.get("name")  # yes, "name" holds the type here — see docstring
             if node_type and node_type not in seen:
-                # crude display-name guess from the type string, e.g.
-                # "n8n-nodes-base.googleSheets" -> "Google Sheets"
-                short = node_type.split(".")[-1]
-                display = "".join(
-                    " " + c if c.isupper() else c for c in short
-                ).strip().title()
-                seen[node_type] = display
+                seen[node_type] = node.get("displayName") or node_type.split(".")[-1].title()
 
     merged = dict(existing)
     for node_type, display in seen.items():
