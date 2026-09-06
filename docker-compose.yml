@@ -3,7 +3,9 @@ services:
     build: ./backend
     ports:
       - "8000:8000"
-    # Uncomment to enable the optional LLM step (see backend/.env.example).
-    # The app runs fine without it — it just skips the HyDE query rewrite.
-    # env_file:
-    #   - ./backend/.env
+    # Enables the optional LLM step (see backend/.env.example) if
+    # backend/.env exists; `required: false` means a fresh clone without one
+    # still runs fine — it just skips the HyDE query rewrite.
+    env_file:
+      - path: ./backend/.env
+        required: false
