@@ -45,6 +45,18 @@ def _patch_client(monkeypatch, response_json):
     return captured
 
 
+def test_build_prompt_includes_other_workflow_nodes():
+    prompt = llm._build_prompt("Webhook", "My Workflow", ["Set", "IF"], ["HTTP Request", "Code"])
+    assert "HTTP Request" in prompt
+    assert "Code" in prompt
+    assert "Webhook" in prompt
+
+
+def test_build_prompt_omits_other_nodes_line_when_none_given():
+    prompt = llm._build_prompt("Webhook", "My Workflow", ["Set", "IF"], [])
+    assert "also already contains" not in prompt
+
+
 async def test_call_anthropic_parses_response(monkeypatch):
     captured = _patch_client(
         monkeypatch, {"content": [{"text": "A node that sends a Slack message."}]}

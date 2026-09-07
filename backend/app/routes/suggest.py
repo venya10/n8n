@@ -32,8 +32,19 @@ async def suggest(req: SuggestRequest) -> SuggestResponse:
             for c in stats_candidates
             if c["to"] in retrieval.NODE_BY_TYPE
         ]
+        # A snapshot of the rest of the workflow, not just the last node —
+        # gives the LLM more than "you're on a Webhook" to reason about.
+        other_node_names = list(
+            dict.fromkeys(
+                retrieval.NODE_BY_TYPE[n.type]["display_name"]
+                if n.type in retrieval.NODE_BY_TYPE
+                else n.type
+                for n in ctx.nodes
+                if n.id != last_node.id
+            )
+        )
         generated_spec = await llm.generate_next_node_spec(
-            last_node_name, ctx.workflow_name, common_next_names
+            last_node_name, ctx.workflow_name, common_next_names, other_node_names
         )
         query = generated_spec
     else:

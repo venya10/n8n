@@ -29,6 +29,8 @@ Usage:
     python evaluate.py --use-llm            # does the HyDE query beat the plain
                                              # template query, on a small sample?
     python evaluate.py --use-llm --sample 200
+    python evaluate.py --use-llm-context    # does a whole-workflow snapshot beat
+                                             # a last-node-only HyDE prompt?
 """
 
 import argparse
@@ -47,6 +49,7 @@ TEST_FRACTION = 0.2
 SEED = 0
 RANK_CUTOFF = 20  # how deep to look for the real answer before scoring it a miss
 DEFAULT_LLM_SAMPLE_SIZE = 60
+DEFAULT_CONTEXT_SAMPLE_SIZE = 30  # 2 LLM calls per item here, so kept smaller
 LLM_HINT_TOP_K = 5  # matches suggest.py's req.top_k default for the common_next hint
 LLM_CALL_DELAY_SECONDS = 4.5  # observed free-tier limit is much stricter than 1/sec
 
@@ -71,6 +74,105 @@ def build_test_edges(test_files: list[Path]) -> list[tuple[str, str]]:
             continue
         edges.extend(extract_edges(workflow))
     return edges
+
+
+def build_test_edges_with_context(
+    test_files: list[Path],
+) -> list[tuple[str, str, list[str]]]:
+    """Like build_test_edges, but also captures every other real node type
+    present in that edge's originating workflow — for testing whether
+    giving the LLM prompt a snapshot of the whole workflow (not just the
+    last node) produces a better HyDE query. to_type itself is excluded
+    from that "other nodes" list: it's the answer being predicted, and a
+    real /suggest caller couldn't have it in their workflow yet either.
+    """
+    items = []
+    for path in test_files:
+        workflow = load_workflow(path)
+        if workflow is None:
+            continue
+        all_types = list(
+            dict.fromkeys(n["type"] for n in workflow.get("nodes", []) if n.get("type"))
+        )
+        for from_type, to_type in extract_edges(workflow):
+            other_types = [t for t in all_types if t != to_type]
+            items.append((from_type, to_type, other_types))
+    return items
+
+
+async def run_llm_context_comparison(test_files: list[Path], train_transitions: dict, sample_size: int) -> None:
+    """Does passing a snapshot of the whole workflow (not just the last
+    node) to the LLM produce a better HyDE query than run_llm_comparison's
+    already-validated last-node-only prompt? Samples individual edges, not
+    distinct from_types like the other comparisons — two edges sharing a
+    from_type can come from different workflows with different surrounding
+    nodes, which is exactly the variable being tested, so they can't share
+    one cached query the way the from_type-only prompt could.
+    """
+    items = build_test_edges_with_context(test_files)
+    rng = random.Random(SEED)
+    rng.shuffle(items)
+    sampled = items[:sample_size]
+    print(
+        f"Sampling {len(sampled)} individual edges "
+        f"(2 LLM calls each: with and without workflow context)...\n"
+    )
+
+    without_context_candidates = []
+    with_context_candidates = []
+    kept_to_types = []
+
+    for i, (from_type, to_type, other_types) in enumerate(sampled):
+        stats_candidates = sorted(
+            train_transitions.get(from_type, []), key=lambda e: e["count"], reverse=True
+        )[:RANK_CUTOFF]
+        meta = retrieval.NODE_BY_TYPE.get(from_type)
+        from_name = meta["display_name"] if meta else from_type
+        hint_candidates = stats_candidates[:LLM_HINT_TOP_K]
+        common_next_names = [
+            retrieval.NODE_BY_TYPE[c["to"]]["display_name"]
+            for c in hint_candidates
+            if c["to"] in retrieval.NODE_BY_TYPE
+        ]
+        other_names = [
+            retrieval.NODE_BY_TYPE[t]["display_name"] if t in retrieval.NODE_BY_TYPE else t
+            for t in other_types
+        ]
+
+        query_without = await _generate_spec_with_retry(from_name, common_next_names)
+        time.sleep(LLM_CALL_DELAY_SECONDS)
+        query_with = await _generate_spec_with_retry(from_name, common_next_names, other_names)
+        time.sleep(LLM_CALL_DELAY_SECONDS)
+
+        if query_without is None or query_with is None:
+            print(f"  ({i + 1}/{len(sampled)}) skipped {from_type} -> {to_type}: a call failed")
+            continue
+
+        without_context_candidates.append(
+            (
+                stats_candidates,
+                retrieval.semantic_search(query_without, top_k=RANK_CUTOFF, exclude={from_type}),
+            )
+        )
+        with_context_candidates.append(
+            (
+                stats_candidates,
+                retrieval.semantic_search(query_with, top_k=RANK_CUTOFF, exclude={from_type}),
+            )
+        )
+        kept_to_types.append(to_type)
+
+    print(f"\n{len(kept_to_types)}/{len(sampled)} edges succeeded on both calls\n")
+
+    for weight, weight_label in [(1.0, "pure semantic"), (0.1, "shipped default (0.9/0.1)")]:
+        print(f"=== semantic_weight={weight} ({weight_label}) ===")
+        _print_table(
+            [
+                ("without context", evaluate_indexed(kept_to_types, without_context_candidates, weight)),
+                ("with context", evaluate_indexed(kept_to_types, with_context_candidates, weight)),
+            ]
+        )
+        print()
 
 
 def candidates_by_from_type(test_edges: list[tuple[str, str]], train_transitions: dict) -> dict:
@@ -99,20 +201,31 @@ def candidates_by_from_type(test_edges: list[tuple[str, str]], train_transitions
     return cache
 
 
-async def _generate_spec_with_retry(from_name: str, common_next_names: list[str]) -> str | None:
-    """Retries on 429 with backoff — free-tier rate limits are much
-    stricter than a flat per-call delay can reliably stay under, and giving
-    up on the first 429 (the original behavior here) wasted most of a
-    sample to a transient, retryable error rather than a real failure.
-    Returns None (caller skips this from_type) if it still fails after
-    retrying — a real error, not just rate limiting, should still surface.
+async def _generate_spec_with_retry(
+    from_name: str, common_next_names: list[str], other_nodes: list[str] | None = None
+) -> str | None:
+    """Retries on 429 (rate limit) and network-level errors (timeouts,
+    connection resets) with backoff. A flat per-call delay isn't a reliable
+    enough guarantee to skip retrying — and this must catch httpx.HTTPError
+    broadly, not just HTTPStatusError: an uncaught httpx.ReadTimeout here
+    once took down an entire multi-minute run, losing every call's progress
+    to one transient network hiccup.
+    Returns None (caller skips this item) if it still fails after
+    retrying — a real error, not just a transient one, should still surface.
     """
     delays = [LLM_CALL_DELAY_SECONDS, 15, 30]
     for attempt, delay in enumerate(delays):
         try:
-            return await llm.generate_next_node_spec(from_name, None, common_next_names)
+            return await llm.generate_next_node_spec(
+                from_name, None, common_next_names, other_nodes
+            )
         except httpx.HTTPStatusError as exc:
             if exc.response.status_code != 429 or attempt == len(delays) - 1:
+                print(f"  (LLM call failed for {from_name!r}: {exc} - skipping)")
+                return None
+            time.sleep(delay)
+        except httpx.HTTPError as exc:
+            if attempt == len(delays) - 1:
                 print(f"  (LLM call failed for {from_name!r}: {exc} - skipping)")
                 return None
             time.sleep(delay)
@@ -153,26 +266,25 @@ async def candidates_by_from_type_llm(distinct_from_types: list[str], train_tran
     return cache
 
 
-def evaluate(
-    test_edges: list[tuple[str, str]], candidate_cache: dict, semantic_weight: float
-) -> dict:
+def _score(rows, semantic_weight: float) -> dict:
+    """Shared scoring loop. rows: iterable of (true_to_type, stats_candidates,
+    semantic_candidates) — the actual data source varies (a from_type-keyed
+    cache for the sweeps/plain-vs-HyDE comparison, a parallel per-edge list
+    for the workflow-context comparison below), but the scoring math is the
+    same either way.
+    """
     recall_at = {1: 0, 3: 0, 5: 0, 10: 0}
     reciprocal_ranks = []
     evaluable = 0
 
-    for from_type, true_to_type in test_edges:
+    for true_to_type, stats_candidates, semantic_candidates in rows:
         # Can't meaningfully evaluate a node type semantic search has never
         # heard of (no metadata entry) — same "silently dropped" behavior
         # the real API has via rerank's NODE_BY_TYPE lookup.
         if true_to_type not in retrieval.NODE_BY_TYPE:
             continue
-        # Not in the cache means either it's outside this run's sample, or
-        # (llm mode only) the LLM call for it failed and was skipped.
-        if from_type not in candidate_cache:
-            continue
         evaluable += 1
 
-        stats_candidates, semantic_candidates = candidate_cache[from_type]
         suggestions = rerank.merge_and_rank(
             stats_candidates,
             semantic_candidates,
@@ -199,6 +311,35 @@ def evaluate(
         "mrr": sum(reciprocal_ranks) / evaluable,
         **{f"recall@{k}": v / evaluable for k, v in recall_at.items()},
     }
+
+
+def evaluate(
+    test_edges: list[tuple[str, str]], candidate_cache: dict, semantic_weight: float
+) -> dict:
+    # Not in the cache means either it's outside this run's sample, or
+    # (llm mode only) the LLM call for it failed and was skipped.
+    rows = (
+        (true_to_type, *candidate_cache[from_type])
+        for from_type, true_to_type in test_edges
+        if from_type in candidate_cache
+    )
+    return _score(rows, semantic_weight)
+
+
+def evaluate_indexed(
+    true_to_types: list[str], candidates: list[tuple[list[dict], list[dict]]], semantic_weight: float
+) -> dict:
+    """Like evaluate(), but for the workflow-context comparison below, where
+    candidates are computed per-edge (not per-from_type — two edges sharing
+    a from_type can come from different workflows with different
+    surrounding nodes, which is exactly the thing being tested) and so are
+    already aligned to true_to_types by position, not by a from_type key.
+    """
+    rows = (
+        (true_to_type, stats_c, semantic_c)
+        for true_to_type, (stats_c, semantic_c) in zip(true_to_types, candidates)
+    )
+    return _score(rows, semantic_weight)
 
 
 def _print_table(rows: list[tuple[str, dict]]) -> None:
@@ -306,10 +447,18 @@ def main() -> None:
         help="Compare the LLM/HyDE query against the plain template query, on a sample.",
     )
     parser.add_argument(
+        "--use-llm-context",
+        action="store_true",
+        help="Compare last-node-only vs whole-workflow-snapshot LLM prompts, on a sample.",
+    )
+    parser.add_argument(
         "--sample",
         type=int,
-        default=DEFAULT_LLM_SAMPLE_SIZE,
-        help=f"Distinct from_types to sample for --use-llm (default {DEFAULT_LLM_SAMPLE_SIZE}).",
+        default=None,
+        help=(
+            f"Sample size for --use-llm (default {DEFAULT_LLM_SAMPLE_SIZE} distinct from_types) "
+            f"or --use-llm-context (default {DEFAULT_CONTEXT_SAMPLE_SIZE} edges, 2 calls each)."
+        ),
     )
     args = parser.parse_args()
 
@@ -321,14 +470,21 @@ def main() -> None:
     print(f"{len(train_files)} train templates, {len(test_files)} test templates\n")
 
     train_transitions = mine_transitions(train_files)
-    test_edges = build_test_edges(test_files)
-    print(f"{len(test_edges)} test edges (real from_type -> to_type pairs)\n")
 
     if not retrieval.load_model():
         raise SystemExit("Semantic search model failed to load — can't evaluate.")
 
+    if args.use_llm_context:
+        sample_size = args.sample if args.sample is not None else DEFAULT_CONTEXT_SAMPLE_SIZE
+        asyncio.run(run_llm_context_comparison(test_files, train_transitions, sample_size))
+        return
+
+    test_edges = build_test_edges(test_files)
+    print(f"{len(test_edges)} test edges (real from_type -> to_type pairs)\n")
+
     if args.use_llm:
-        asyncio.run(run_llm_comparison(test_edges, train_transitions, args.sample))
+        sample_size = args.sample if args.sample is not None else DEFAULT_LLM_SAMPLE_SIZE
+        asyncio.run(run_llm_comparison(test_edges, train_transitions, sample_size))
         return
 
     print("Embedding candidates once per distinct from_type (reused across the weight sweep)...")

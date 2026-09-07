@@ -117,6 +117,7 @@ pip install -r requirements.txt -r ../backend/requirements.txt  # evaluate.py im
 python evaluate.py                # sweeps semantic_weight from 0.0 to 1.0
 python evaluate.py --weight 0.1   # evaluate one specific split
 python evaluate.py --use-llm       # does the real LLM/HyDE query beat the plain template query?
+python evaluate.py --use-llm-context  # does a whole-workflow snapshot beat a last-node-only prompt?
 ```
 
 **What it found**, against 1,547 evaluable held-out edges: pure transition-frequency ranking (`semantic_weight=0.0`) beat every blend on every metric (MRR 0.348, Recall@5 0.547, Recall@10 0.701), and got *worse*, not better, as semantic search's weight increased — cratering badly past 0.6. The `0.6/0.4` split this shipped with originally was never validated against anything; it was a plausible-sounding guess. It's now `0.9/0.1` (see `backend/app/services/rerank.py`) — not literally `1.0/0.0`, because a semantic weight of exactly zero would degenerate the "unknown node type" fallback path (nothing else to rank by) to an arbitrary tie-order instead of a real similarity ranking, and 0.1 scored statistically indistinguishably from 0.0 anyway (the gap is smaller than one standard error at this sample size).
@@ -134,6 +135,13 @@ The more likely explanation is architectural, not data quality: without the LLM/
 - On top of that modest gain, real free-tier LLM calls introduce genuine unreliability worth knowing about first-hand rather than assuming: `gemini-3.6-flash`'s free tier turned out to cap at **20 requests/day** (confirmed by reading the actual 429 response body, not guessing), and the lighter `gemini-flash-lite-latest` returned intermittent `503`s under this evaluation's sustained call rate. A production system would need a paid tier or a self-hosted model (Ollama) to use this reliably, not the free tier.
 
 **Conclusion**: `use_llm=True` is a real, validated improvement, but a modest one, and the honest tradeoff is added latency + a third-party dependency (rate-limited or paid) per suggestion for a few points of Recall@10. Leaving it off by default is a defensible call, not just an oversight — turn it on if you have a properly provisioned LLM backend and want the small quality bump.
+
+**Does the LLM prompt need the whole workflow, or just the last node?** Originally the HyDE prompt only knew the single most recent node — a 10-node workflow and a 1-node workflow got the identical prompt as long as their last node matched. `generate_next_node_spec` now also takes a snapshot of every other node already in the workflow (`suggest.py` builds this from `ctx.nodes`, deduplicated, excluding the last node itself and — critically for a fair test — excluding the true answer being predicted). `python evaluate.py --use-llm-context [--sample N]` compares last-node-only vs whole-workflow-snapshot prompts, one real LLM call each way per sampled edge (paired, so it's apples-to-apples). Result, on 30 real edges:
+
+- **In isolation** (`semantic_weight=1.0`): a small positive nudge (MRR 0.113 vs 0.097, Recall@5 0.167 vs 0.100) — but at n=30 the standard error on proportions like these is roughly ±0.09, so this is within noise, not a demonstrated win.
+- **At the shipped default** (`semantic_weight=0.1`): essentially a wash, if anything marginally worse (MRR 0.276 vs 0.283) — again noise-level, not a real regression.
+
+**Conclusion**: no measurable effect either way at a sample size a free-tier API can actually afford (30 edges × 2 calls each already took several minutes and hit real rate limits along the way). The feature ships anyway — it costs nothing extra at inference time (same one LLM call, just a longer prompt) and is more honest about what the LLM actually knows — but "gives the LLM more context" turned out not to be the thing that was limiting `use_llm`'s quality here. A meaningfully larger sample (probably requiring a paid tier to run without hours of rate-limit waiting) would be needed to detect an effect this small, if one exists at all.
 
 ## Known limitations
 

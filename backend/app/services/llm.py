@@ -24,11 +24,19 @@ OLLAMA_URL = os.getenv("OLLAMA_URL")  # e.g. http://localhost:11434
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2")
 
 
-def _build_prompt(last_node_name: str, workflow_name: str | None, common_next: list[str]) -> str:
+def _build_prompt(
+    last_node_name: str,
+    workflow_name: str | None,
+    common_next: list[str],
+    other_nodes: list[str],
+) -> str:
     context_line = f'Workflow: "{workflow_name}". ' if workflow_name else ""
+    other_nodes_line = (
+        f"The workflow also already contains: {', '.join(other_nodes)}. " if other_nodes else ""
+    )
     hints = ", ".join(common_next) if common_next else "no strong statistical hints available"
     return (
-        f"{context_line}The workflow's most recent node is: {last_node_name}. "
+        f"{context_line}{other_nodes_line}The workflow's most recent node is: {last_node_name}. "
         f"Nodes that commonly follow it in similar workflows: {hints}. "
         "In one sentence, describe what the ideal next node in this workflow should do. "
         "Be concrete about the action, not the specific n8n node name."
@@ -46,8 +54,15 @@ async def generate_next_node_spec(
     last_node_name: str,
     workflow_name: str | None,
     common_next: list[str],
+    other_nodes: list[str] | None = None,
 ) -> str:
-    prompt = _build_prompt(last_node_name, workflow_name, common_next)
+    """other_nodes: display names of the workflow's other nodes (besides the
+    last one), if known — gives the LLM a snapshot of the whole workflow
+    built so far instead of just the single most recent node. Optional and
+    defaults to none, since not every caller (e.g. the initial evaluate.py
+    experiments) has this available.
+    """
+    prompt = _build_prompt(last_node_name, workflow_name, common_next, other_nodes or [])
 
     if ANTHROPIC_API_KEY:
         return await _call_anthropic(prompt)
@@ -80,7 +95,7 @@ async def _call_anthropic(prompt: str) -> str:
 
 
 async def _call_gemini(prompt: str) -> str:
-    async with httpx.AsyncClient(timeout=15) as client:
+    async with httpx.AsyncClient(timeout=30) as client:
         resp = await client.post(
             f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent",
             params={"key": GEMINI_API_KEY},
