@@ -92,6 +92,13 @@ The backend deploys to [Render](https://render.com)'s free tier as a Docker web 
 3. Render builds `backend/Dockerfile` and deploys it; `envVars` in `render.yaml` are left blank on purpose (`sync: false`) — fill in `ANTHROPIC_API_KEY` etc. in the Render dashboard if you want the LLM step, or leave them unset.
 4. Once it's live, `GET https://<service>.onrender.com/health` should return `{"status": "ok", "model_loaded": true}`.
 
+**Avoiding the cold-start wait**: Render's free tier spins the service down after 15 minutes idle, so the first request after that takes 30-50s (container boot + loading the embedding model). Fix it for free with an external uptime pinger instead of upgrading to a paid tier:
+
+1. Sign up at [cron-job.org](https://cron-job.org) (or UptimeRobot, or any similar free service).
+2. Create a new cron job hitting `GET https://<your-service>.onrender.com/health`.
+3. Set the interval to every 10 minutes (must be under Render's 15-minute idle timeout).
+4. Save it — as long as it keeps running, the service never goes idle long enough to spin down, so every request stays fast.
+
 ## Rebuilding the dataset
 
 ```bash
