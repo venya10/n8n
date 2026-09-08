@@ -11,7 +11,7 @@ A Chrome extension that suggests the next node while you build an n8n workflow, 
 
 **[https://n8n-copilot-api.onrender.com](https://n8n-copilot-api.onrender.com)** — try `GET /health` or `POST /suggest` (see [Running the backend](#running-the-backend) for a full example request).
 
-Render's free tier spins down after 15 minutes of inactivity, so the first request after a while can take 30-50s (container boot + loading the embedding model) unless the keep-alive pinger described in [Deploying](#deploying) is active.
+Render's free tier spins down after 15 minutes of inactivity — **the keep-alive pinger described in [Deploying](#deploying) is not currently set up**, so if this link hasn't been hit recently, expect the first request to take 30-50s (container boot + loading the embedding model) before it responds normally. Hitting `/health` once first is an easy way to "warm it up" before trying `/suggest` or the extension.
 
 ## Architecture
 
