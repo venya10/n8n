@@ -9,6 +9,75 @@
 const N8nCopilotOverlay = (() => {
   let panelEl = null;
 
+  const POSITION_STORAGE_KEY = "n8nCopilotPanelPosition";
+
+  function loadSavedPosition() {
+    try {
+      const raw = localStorage.getItem(POSITION_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null; // corrupt/blocked storage — just fall back to the default position
+    }
+  }
+
+  function savePosition(left, top) {
+    try {
+      localStorage.setItem(POSITION_STORAGE_KEY, JSON.stringify({ left, top }));
+    } catch {
+      // best-effort; losing the remembered position isn't worth surfacing an error
+    }
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function applyPosition(panel, left, top) {
+    // The panel defaults to `bottom`/`right` positioning (see overlay.css);
+    // once dragged, switch to explicit `left`/`top` so it stays wherever the
+    // user put it instead of re-anchoring to a corner.
+    const maxLeft = window.innerWidth - panel.offsetWidth;
+    const maxTop = window.innerHeight - panel.offsetHeight;
+    const clampedLeft = clamp(left, 0, Math.max(0, maxLeft));
+    const clampedTop = clamp(top, 0, Math.max(0, maxTop));
+    panel.style.left = `${clampedLeft}px`;
+    panel.style.top = `${clampedTop}px`;
+    panel.style.right = "auto";
+    panel.style.bottom = "auto";
+    return { left: clampedLeft, top: clampedTop };
+  }
+
+  function makeDraggable(panel, header) {
+    let dragOffsetX = 0;
+    let dragOffsetY = 0;
+
+    function onMouseMove(event) {
+      const { left, top } = applyPosition(
+        panel,
+        event.clientX - dragOffsetX,
+        event.clientY - dragOffsetY
+      );
+      savePosition(left, top);
+    }
+
+    function onMouseUp() {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      panel.classList.remove("n8nc-dragging");
+    }
+
+    header.addEventListener("mousedown", (event) => {
+      if (event.target.closest(".n8nc-close")) return; // don't start a drag from the close button
+      const rect = panel.getBoundingClientRect();
+      dragOffsetX = event.clientX - rect.left;
+      dragOffsetY = event.clientY - rect.top;
+      panel.classList.add("n8nc-dragging");
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
+      event.preventDefault(); // avoid text-selection while dragging
+    });
+  }
+
   function ensurePanel() {
     if (panelEl) return panelEl;
 
@@ -26,6 +95,12 @@ const N8nCopilotOverlay = (() => {
       panelEl.hidden = true;
     });
     document.body.appendChild(panelEl);
+
+    const saved = loadSavedPosition();
+    if (saved) applyPosition(panelEl, saved.left, saved.top);
+
+    makeDraggable(panelEl, panelEl.querySelector(".n8nc-header"));
+
     return panelEl;
   }
 

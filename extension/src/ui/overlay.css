@@ -19,12 +19,19 @@
   display: none;
 }
 
+#n8n-copilot-panel.n8nc-dragging {
+  /* Text selection during a mousemove-based drag looks broken (the browser
+     tries to select page text under the cursor) — suppress it while active. */
+  user-select: none;
+}
+
 #n8n-copilot-panel .n8nc-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
   font-weight: 600;
+  cursor: move;
 }
 
 #n8n-copilot-panel .n8nc-close {
