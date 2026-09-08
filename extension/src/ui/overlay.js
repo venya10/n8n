@@ -135,9 +135,11 @@ const N8nCopilotOverlay = (() => {
         // "73% likely correct". A relative-length bar shows ranking without
         // implying a confidence level the number doesn't actually carry.
         const meterWidth = Math.max(0, Math.min(100, Math.round(s.score * 100)));
+        const badgeLabel = { stats: "Stats", semantic: "Semantic", both: "Both" }[s.source] || s.source;
         card.innerHTML = `
           <div class="n8nc-card-title">
             <span>${s.display_name}</span>
+            <span class="n8nc-badge" title="${s.reason}">${badgeLabel}</span>
           </div>
           <div class="n8nc-meter" title="Relative match strength">
             <div class="n8nc-meter-fill" style="width: ${meterWidth}%"></div>

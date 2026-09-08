@@ -1,6 +1,8 @@
 const input = document.getElementById("apiBase");
+const useLlmToggle = document.getElementById("useLlm");
 const statusEl = document.getElementById("status");
 const connection = document.getElementById("connection");
+const connectionText = connection.querySelector(".text");
 
 // A trailing slash here would turn `${apiBase}/health` into a double slash
 // (".../health" -> ".../"+"/health"), which 404s — easy to type by habit or
@@ -9,15 +11,17 @@ function normalizeApiBase(value) {
   return value.trim().replace(/\/+$/, "");
 }
 
-chrome.storage.sync.get("apiBase", ({ apiBase }) => {
+chrome.storage.sync.get(["apiBase", "useLlm"], ({ apiBase, useLlm }) => {
   input.value = apiBase || "http://localhost:8000";
+  useLlmToggle.checked = Boolean(useLlm);
   checkConnection(input.value);
 });
 
 document.getElementById("save").addEventListener("click", () => {
   const apiBase = normalizeApiBase(input.value);
+  const useLlm = useLlmToggle.checked;
   input.value = apiBase;
-  chrome.storage.sync.set({ apiBase }, () => {
+  chrome.storage.sync.set({ apiBase, useLlm }, () => {
     statusEl.textContent = "Saved.";
     setTimeout(() => (statusEl.textContent = ""), 1500);
     checkConnection(apiBase);
@@ -25,18 +29,18 @@ document.getElementById("save").addEventListener("click", () => {
 });
 
 async function checkConnection(apiBase) {
-  connection.textContent = "Checking connection…";
+  connectionText.textContent = "Checking connection…";
   connection.className = "";
   try {
     const res = await fetch(`${apiBase}/health`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const body = await res.json();
-    connection.textContent = body.model_loaded
+    connectionText.textContent = body.model_loaded
       ? "Connected"
       : "Connected (semantic search unavailable)";
     connection.className = "ok";
   } catch {
-    connection.textContent = "Backend unreachable";
+    connectionText.textContent = "Backend unreachable";
     connection.className = "error";
   }
 }
