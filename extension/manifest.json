@@ -4,7 +4,12 @@
   "version": "0.1.0",
   "description": "Suggests the next node while you build n8n workflows.",
   "permissions": ["storage"],
-  "host_permissions": ["http://localhost:8000/*", "https://*.n8n.cloud/*", "http://localhost:5678/*"],
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "https://n8n-copilot-api.onrender.com/*",
+    "https://*.n8n.cloud/*",
+    "http://localhost:5678/*"
+  ],
   "background": {
     "service_worker": "src/background/background.js"
   },
