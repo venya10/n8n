@@ -61,21 +61,35 @@ const N8nCopilotOverlay = (() => {
     }
 
     function onMouseUp() {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("mousemove", onMouseMove, true);
+      document.removeEventListener("mouseup", onMouseUp, true);
       panel.classList.remove("n8nc-dragging");
     }
 
-    header.addEventListener("mousedown", (event) => {
-      if (event.target.closest(".n8nc-close")) return; // don't start a drag from the close button
-      const rect = panel.getBoundingClientRect();
-      dragOffsetX = event.clientX - rect.left;
-      dragOffsetY = event.clientY - rect.top;
-      panel.classList.add("n8nc-dragging");
-      document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseup", onMouseUp);
-      event.preventDefault(); // avoid text-selection while dragging
-    });
+    // n8n's own canvas has its own global drag-to-pan handling, almost
+    // certainly attached to `document` for capturing mousedown so it can
+    // intercept drags anywhere on the page — if it calls stopPropagation()
+    // there, a listener on `header` itself (deeper in the tree) would never
+    // even see the event. Listening on `document` in the capture phase
+    // puts this at the same level, so stopPropagation() elsewhere can't
+    // silently swallow it (only stopImmediatePropagation on this exact
+    // node could, which is far less commonly used).
+    document.addEventListener(
+      "mousedown",
+      (event) => {
+        if (!header.contains(event.target)) return;
+        if (event.target.closest(".n8nc-close")) return; // don't drag from the close button
+        const rect = panel.getBoundingClientRect();
+        dragOffsetX = event.clientX - rect.left;
+        dragOffsetY = event.clientY - rect.top;
+        panel.classList.add("n8nc-dragging");
+        document.addEventListener("mousemove", onMouseMove, true);
+        document.addEventListener("mouseup", onMouseUp, true);
+        event.preventDefault();
+        event.stopPropagation();
+      },
+      true
+    );
   }
 
   function ensurePanel() {
