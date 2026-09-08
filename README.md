@@ -80,7 +80,7 @@ Both run on every push via [GitHub Actions](.github/workflows/ci.yml).
 
 1. Go to `chrome://extensions`, enable Developer Mode.
 2. "Load unpacked" → select the `extension/` folder.
-3. Click the extension icon and confirm the backend URL (defaults to `http://localhost:8000`; the popup shows whether it's reachable). The popup also has an **AI-enhanced suggestions** toggle for `use_llm` (off by default — see [Evaluating suggestion quality](#evaluating-suggestion-quality) for why).
+3. Click the extension icon and confirm the backend URL — defaults to the live deployment (`https://n8n-copilot-api.onrender.com`), since most people installing this extension aren't also running the backend locally; point it at `http://localhost:8000` instead if you're developing against a local backend from [Running the backend](#running-the-backend). The popup shows whether the configured URL is actually reachable. It also has an **AI-enhanced suggestions** toggle for `use_llm` (off by default — see [Evaluating suggestion quality](#evaluating-suggestion-quality) for why).
 4. Open a workflow in n8n (self-hosted `localhost:5678` or n8n cloud) — the suggestion panel appears bottom-right as you add nodes. It's draggable — grab the header to move it out of the way of n8n's own node search panel.
 
 ## Deploying

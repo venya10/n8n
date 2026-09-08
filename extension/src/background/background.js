@@ -1,4 +1,8 @@
-const DEFAULT_API_BASE = "http://localhost:8000";
+// Points at the live deployment by default — most people installing this
+// extension aren't also running the backend locally. Change to
+// "http://localhost:8000" here (or just in the popup) when developing
+// against a local backend instead.
+const DEFAULT_API_BASE = "https://n8n-copilot-api.onrender.com";
 
 async function getSettings() {
   const { apiBase, useLlm } = await chrome.storage.sync.get(["apiBase", "useLlm"]);

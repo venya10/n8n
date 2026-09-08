@@ -1,3 +1,8 @@
+// Points at the live deployment by default — most people installing this
+// extension aren't also running the backend locally (see background.js,
+// which has the same default for when nothing's been saved yet).
+const DEFAULT_API_BASE = "https://n8n-copilot-api.onrender.com";
+
 const input = document.getElementById("apiBase");
 const useLlmToggle = document.getElementById("useLlm");
 const statusEl = document.getElementById("status");
@@ -12,7 +17,7 @@ function normalizeApiBase(value) {
 }
 
 chrome.storage.sync.get(["apiBase", "useLlm"], ({ apiBase, useLlm }) => {
-  input.value = apiBase || "http://localhost:8000";
+  input.value = apiBase || DEFAULT_API_BASE;
   useLlmToggle.checked = Boolean(useLlm);
   checkConnection(input.value);
 });
