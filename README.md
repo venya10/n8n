@@ -7,8 +7,6 @@ A Chrome extension that suggests the next node while you build an n8n workflow, 
 ![Demo](docs/demo.gif)
 *(placeholder — demo GIF/screenshot to be added)*
 
-**Live API docs**: [n8n-copilot-api.onrender.com/docs](https://n8n-copilot-api.onrender.com/docs) — interactive Swagger UI; expand `POST /suggest`, click "Try it out", and run a real request against the live backend without installing anything. (The extension itself needs a real n8n instance to demo against — see the placeholder above, or [Run locally](#run-locally).)
-
 ## Why this exists
 
 Building an n8n workflow means repeatedly searching hundreds of node types by name to figure out what comes next. This project tests whether that next step can instead be predicted — from what real workflows actually do, not from a guess — and surfaced directly in the editor.
@@ -94,7 +92,7 @@ Extension: `chrome://extensions` → Developer Mode → Load unpacked → select
 
 ## Deployment
 
-Backend runs on [Render](https://render.com)'s free tier as a Docker service, deployed from [`render.yaml`](render.yaml). Free tier spins down after 15 minutes idle, so a cold request can take 30-50s (no keep-alive pinger currently configured).
+Backend runs on [Render](https://render.com)'s free tier as a Docker service, deployed from [`render.yaml`](render.yaml): **[n8n-copilot-api.onrender.com](https://n8n-copilot-api.onrender.com)** (interactive API docs at `/docs`). Free tier spins down after 15 minutes idle, so a cold request can take 30-50s (no keep-alive pinger currently configured).
 
 ## Known limitations
 
