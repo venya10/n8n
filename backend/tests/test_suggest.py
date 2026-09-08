@@ -34,12 +34,18 @@ def test_suggest_known_node_returns_ranked_suggestions(client):
     assert body["generated_spec"] is None
 
 
-def test_suggest_excludes_nodes_already_in_workflow(client):
+def test_suggest_can_repeat_a_node_type_already_in_workflow(client):
+    # Real workflows commonly reuse a node type more than once — chaining
+    # two HTTP Request nodes in a row is, per the mined data, the single
+    # most common real transition of all. A node type already present
+    # elsewhere in the workflow shouldn't be suppressed just for that
+    # reason, as long as the data actually supports suggesting it again.
+    top_stats_type = stats.get_common_next_nodes("n8n-nodes-base.webhook", limit=1)[0]["to"]
     body = {
         "context": {
             "nodes": [
                 {"id": "1", "type": "n8n-nodes-base.webhook"},
-                {"id": "2", "type": "n8n-nodes-base.if"},
+                {"id": "2", "type": top_stats_type},
             ],
             "last_node_id": "1",
         },
@@ -49,7 +55,7 @@ def test_suggest_excludes_nodes_already_in_workflow(client):
     res = client.post("/suggest", json=body)
     assert res.status_code == 200
     types = [s["node_type"] for s in res.json()["suggestions"]]
-    assert "n8n-nodes-base.if" not in types
+    assert top_stats_type in types
 
 
 def test_suggest_unknown_node_type_falls_back_to_semantic_only(client):

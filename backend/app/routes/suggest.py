@@ -18,12 +18,16 @@ async def suggest(req: SuggestRequest) -> SuggestResponse:
     last_meta = retrieval.NODE_BY_TYPE.get(last_node.type)
     last_node_name = last_meta["display_name"] if last_meta else last_node.type
 
-    already_present = {n.type for n in ctx.nodes}
-
-    stats_candidates = [
-        c for c in stats.get_common_next_nodes(last_node.type, limit=req.top_k)
-        if c["to"] not in already_present
-    ]
+    # Real workflows commonly reuse the same node type more than once —
+    # chaining two HTTP Request nodes in a row is, per the mined data, the
+    # single most common real transition of all (more common than any
+    # other node following an HTTP Request). Filtering out every node type
+    # already present anywhere in the workflow used to suppress exactly
+    # that kind of answer, and wasn't what data_pipeline/evaluate.py ever
+    # measured either — it only ever excludes the current node's own type
+    # from the semantic step (see below), not a running list of everything
+    # already used.
+    stats_candidates = stats.get_common_next_nodes(last_node.type, limit=req.top_k)
 
     generated_spec = None
     if req.use_llm:
@@ -50,8 +54,13 @@ async def suggest(req: SuggestRequest) -> SuggestResponse:
     else:
         query = f"a node that follows {last_node_name} in an n8n workflow"
 
+    # Excluding just the current node's own type (not every type in the
+    # workflow) stops semantic search from trivially matching a node
+    # against its own description — always the highest-similarity result,
+    # and not a meaningful recommendation — without suppressing legitimate
+    # repeats of other node types.
     semantic_candidates = retrieval.semantic_search(
-        query, top_k=req.top_k, exclude=already_present
+        query, top_k=req.top_k, exclude={last_node.type}
     )
 
     suggestions = rerank.merge_and_rank(stats_candidates, semantic_candidates, req.top_k)
