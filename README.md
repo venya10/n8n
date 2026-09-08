@@ -4,8 +4,7 @@
 
 A Chrome extension that suggests the next node while you build an n8n workflow, ranked using real usage data instead of guesswork.
 
-![Demo](docs/demo.gif)
-*(placeholder — demo GIF/screenshot to be added)*
+![Demo: adding nodes in n8n and getting ranked suggestions from the extension](docs/demo.gif)
 
 ## Why this exists
 
