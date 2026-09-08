@@ -80,8 +80,8 @@ Both run on every push via [GitHub Actions](.github/workflows/ci.yml).
 
 1. Go to `chrome://extensions`, enable Developer Mode.
 2. "Load unpacked" → select the `extension/` folder.
-3. Click the extension icon and confirm the backend URL (defaults to `http://localhost:8000`; the popup shows whether it's reachable).
-4. Open a workflow in n8n (self-hosted `localhost:5678` or n8n cloud) — the suggestion panel appears bottom-right as you add nodes.
+3. Click the extension icon and confirm the backend URL (defaults to `http://localhost:8000`; the popup shows whether it's reachable). The popup also has an **AI-enhanced suggestions** toggle for `use_llm` (off by default — see [Evaluating suggestion quality](#evaluating-suggestion-quality) for why).
+4. Open a workflow in n8n (self-hosted `localhost:5678` or n8n cloud) — the suggestion panel appears bottom-right as you add nodes. It's draggable — grab the header to move it out of the way of n8n's own node search panel.
 
 ## Deploying
 
@@ -127,7 +127,7 @@ python evaluate.py --use-llm       # does the real LLM/HyDE query beat the plain
 python evaluate.py --use-llm-context  # does a whole-workflow snapshot beat a last-node-only prompt?
 ```
 
-**What it found**, against 1,547 evaluable held-out edges: pure transition-frequency ranking (`semantic_weight=0.0`) beat every blend on every metric (MRR 0.348, Recall@5 0.547, Recall@10 0.701), and got *worse*, not better, as semantic search's weight increased — cratering badly past 0.6. The `0.6/0.4` split this shipped with originally was never validated against anything; it was a plausible-sounding guess. It's now `0.9/0.1` (see `backend/app/services/rerank.py`) — not literally `1.0/0.0`, because a semantic weight of exactly zero would degenerate the "unknown node type" fallback path (nothing else to rank by) to an arbitrary tie-order instead of a real similarity ranking, and 0.1 scored statistically indistinguishably from 0.0 anyway (the gap is smaller than one standard error at this sample size).
+**What it found**, against 1,547 evaluable held-out edges: pure transition-frequency ranking (`semantic_weight=0.0`) beat every blend on every metric (MRR 0.347, Recall@5 0.547, Recall@10 0.701), and got *worse*, not better, as semantic search's weight increased — cratering badly past 0.6. The `0.6/0.4` split this shipped with originally was never validated against anything; it was a plausible-sounding guess. It's now `0.9/0.1` (see `backend/app/services/rerank.py`) — not literally `1.0/0.0`, because a semantic weight of exactly zero would degenerate the "unknown node type" fallback path (nothing else to rank by) to an arbitrary tie-order instead of a real similarity ranking, and 0.1 scored statistically indistinguishably from 0.0 anyway (the gap is smaller than one standard error at this sample size).
 
 Checked the more charitable hypothesis too — that semantic search would at least win on node types stats has *never seen* (true cold start, where there's no frequency signal to fall back on): stratifying the 30 such edges out separately, semantic search still didn't help there either.
 
@@ -149,6 +149,8 @@ The more likely explanation is architectural, not data quality: without the LLM/
 - **At the shipped default** (`semantic_weight=0.1`): essentially a wash, if anything marginally worse (MRR 0.276 vs 0.283) — again noise-level, not a real regression.
 
 **Conclusion**: no measurable effect either way at a sample size a free-tier API can actually afford (30 edges × 2 calls each already took several minutes and hit real rate limits along the way). The feature ships anyway — it costs nothing extra at inference time (same one LLM call, just a longer prompt) and is more honest about what the LLM actually knows — but "gives the LLM more context" turned out not to be the thing that was limiting `use_llm`'s quality here. A meaningfully larger sample (probably requiring a paid tier to run without hours of rate-limit waiting) would be needed to detect an effect this small, if one exists at all.
+
+**One more thing worth knowing: repeated node types are allowed, on purpose.** `/suggest` used to filter out every node type already present anywhere in the workflow, on the reasoning that you probably don't want to see something you already have. Real data says otherwise: `HTTP Request -> HTTP Request` is the single most common real transition in the entire mined dataset — chaining multiple calls, multiple `Set` nodes, multiple `Code` nodes, etc. is completely normal in real n8n workflows, and the old filter silently suppressed exactly that. It also meant production was quietly running a *stricter* ranker than the one `evaluate.py` had ever measured — the eval harness only ever excluded the current node's own type from the semantic step (to stop it trivially matching itself), never a running list of everything already used. `suggest.py` now matches that: stats candidates aren't filtered by workflow contents at all, and semantic search only excludes the current node's own type. Verified against a real screenshot (`Manual Trigger -> Set -> HTTP Request`): previously 3 of 5 suggestion slots were weak semantic-only fallbacks because `Set` and `HTTP Request` were excluded from the stats pool; now all 5 are filled by real, strong stats candidates, including "HTTP Request" as the top pick.
 
 ## Known limitations
 
