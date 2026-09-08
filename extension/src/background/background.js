@@ -2,7 +2,10 @@ const DEFAULT_API_BASE = "http://localhost:8000";
 
 async function getApiBase() {
   const { apiBase } = await chrome.storage.sync.get("apiBase");
-  return apiBase || DEFAULT_API_BASE;
+  // Strip any trailing slash — `${apiBase}/suggest` on a value saved with
+  // one would double up (".../"+"/suggest") and 404. popup.js normalizes
+  // on save, but this guards against a value stored before that existed.
+  return (apiBase || DEFAULT_API_BASE).replace(/\/+$/, "");
 }
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {

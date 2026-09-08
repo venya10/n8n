@@ -2,13 +2,21 @@ const input = document.getElementById("apiBase");
 const statusEl = document.getElementById("status");
 const connection = document.getElementById("connection");
 
+// A trailing slash here would turn `${apiBase}/health` into a double slash
+// (".../health" -> ".../"+"/health"), which 404s — easy to type by habit or
+// copy-paste, so strip it rather than let it silently break the connection.
+function normalizeApiBase(value) {
+  return value.trim().replace(/\/+$/, "");
+}
+
 chrome.storage.sync.get("apiBase", ({ apiBase }) => {
   input.value = apiBase || "http://localhost:8000";
   checkConnection(input.value);
 });
 
 document.getElementById("save").addEventListener("click", () => {
-  const apiBase = input.value.trim();
+  const apiBase = normalizeApiBase(input.value);
+  input.value = apiBase;
   chrome.storage.sync.set({ apiBase }, () => {
     statusEl.textContent = "Saved.";
     setTimeout(() => (statusEl.textContent = ""), 1500);
