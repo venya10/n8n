@@ -45,3 +45,13 @@ async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONR
 @app.get("/health")
 async def health() -> dict:
     return {"status": "ok", "model_loaded": retrieval.is_ready()}
+
+
+@app.get("/")
+async def root() -> dict:
+    return {
+        "name": "n8n Copilot API",
+        "docs": "/docs",
+        "health": "/health",
+        "repo": "https://github.com/venya10/n8n",
+    }
